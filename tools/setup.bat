@@ -25,4 +25,4 @@ pip install -r requirements.txt
 
 echo.
 echo Setup complete! Activate the environment with:
-echo   venv\Scripts\activate.bat
+echo   tools\venv\Scripts\activate.bat

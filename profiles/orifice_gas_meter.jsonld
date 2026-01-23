@@ -1,12 +1,13 @@
 {
   "@context": {
+    "jpi": "https://github.com/JPISolutions/SMProfiles/profiles/v1#",
     "sm": "http://cesmii.org/sm/",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "unit": "http://qudt.org/vocab/unit/",
     "qudt": "http://qudt.org/schema/qudt/"
   },
-  "@id": "sm:OrificeGasMeter",
+  "@id": "jpi:OrificeGasMeter",
   "@type": "sm:EquipmentType",
   "rdfs:label": "Orifice Gas Meter",
   "rdfs:comment": "Configuration and measurements for orifice gas meters following AGA-3 and AGA-8 standards. This profile represents the meter-specific data for an orifice meter run on a flow computer. Applicable to FloBoss, TotalFlow, SCADA pack, and other flow computer implementations.",
@@ -14,7 +15,7 @@
   "sm:manufacturer": "Multiple",
   "sm:properties": [
     {
-      "@id": "sm:OrificeGasMeter/Name",
+      "@id": "jpi:OrificeGasMeter/Name",
       "@type": "sm:Property",
       "rdfs:label": "Meter Name",
       "rdfs:comment": "Identifier for the meter",
@@ -22,7 +23,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/Owner",
+      "@id": "jpi:OrificeGasMeter/Owner",
       "@type": "sm:Property",
       "rdfs:label": "Owner",
       "rdfs:comment": "Owner or operator of the meter",
@@ -30,7 +31,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/Latitude",
+      "@id": "jpi:OrificeGasMeter/Latitude",
       "@type": "sm:Property",
       "rdfs:label": "Latitude",
       "rdfs:comment": "Geographic latitude",
@@ -39,7 +40,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/Longitude",
+      "@id": "jpi:OrificeGasMeter/Longitude",
       "@type": "sm:Property",
       "rdfs:label": "Longitude",
       "rdfs:comment": "Geographic longitude",
@@ -48,7 +49,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/Elevation",
+      "@id": "jpi:OrificeGasMeter/Elevation",
       "@type": "sm:Property",
       "rdfs:label": "Elevation",
       "rdfs:comment": "Elevation above sea level",
@@ -57,7 +58,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/BaseTemperature",
+      "@id": "jpi:OrificeGasMeter/BaseTemperature",
       "@type": "sm:Property",
       "rdfs:label": "Base Temperature",
       "rdfs:comment": "Reference temperature for volume correction",
@@ -66,7 +67,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/BasePressure",
+      "@id": "jpi:OrificeGasMeter/BasePressure",
       "@type": "sm:Property",
       "rdfs:label": "Base Pressure",
       "rdfs:comment": "Reference pressure for volume correction",
@@ -75,7 +76,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/AtmosphericPressure",
+      "@id": "jpi:OrificeGasMeter/AtmosphericPressure",
       "@type": "sm:Property",
       "rdfs:label": "Atmospheric Pressure",
       "rdfs:comment": "Local atmospheric pressure",
@@ -84,7 +85,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/Units",
+      "@id": "jpi:OrificeGasMeter/Units",
       "@type": "sm:Property",
       "rdfs:label": "Unit System",
       "rdfs:comment": "Measurement unit system",
@@ -93,7 +94,7 @@
       "sm:enumeration": ["metric", "imperial"]
     },
     {
-      "@id": "sm:OrificeGasMeter/ContractHour",
+      "@id": "jpi:OrificeGasMeter/ContractHour",
       "@type": "sm:Property",
       "rdfs:label": "Contract Hour",
       "rdfs:comment": "Hour of day when daily volumes roll over (0-23)",
@@ -101,7 +102,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/AGA3_Calculation",
+      "@id": "jpi:OrificeGasMeter/AGA3_Calculation",
       "@type": "sm:Property",
       "rdfs:label": "AGA-3 Calculation Method",
       "rdfs:comment": "AGA-3 calculation standard version",
@@ -110,7 +111,7 @@
       "sm:enumeration": ["AGA3_1985", "AGA3_1992", "AGA3_2013"]
     },
     {
-      "@id": "sm:OrificeGasMeter/OrificeTapType",
+      "@id": "jpi:OrificeGasMeter/OrificeTapType",
       "@type": "sm:Property",
       "rdfs:label": "Orifice Tap Type",
       "rdfs:comment": "Pressure tap configuration",
@@ -119,7 +120,7 @@
       "sm:enumeration": ["Flange", "Pipe", "Corner"]
     },
     {
-      "@id": "sm:OrificeGasMeter/OrificeDiameter",
+      "@id": "jpi:OrificeGasMeter/OrificeDiameter",
       "@type": "sm:Property",
       "rdfs:label": "Orifice Diameter",
       "rdfs:comment": "Physical diameter of orifice plate opening",
@@ -128,7 +129,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/OrificeMaterial",
+      "@id": "jpi:OrificeGasMeter/OrificeMaterial",
       "@type": "sm:Property",
       "rdfs:label": "Orifice Material",
       "rdfs:comment": "Material of orifice plate",
@@ -137,7 +138,7 @@
       "sm:enumeration": ["Type_304_Stainless_Steel", "Type_316_Stainless_Steel", "Monel", "Carbon_Steel"]
     },
     {
-      "@id": "sm:OrificeGasMeter/OrificeReferenceTemperature",
+      "@id": "jpi:OrificeGasMeter/OrificeReferenceTemperature",
       "@type": "sm:Property",
       "rdfs:label": "Orifice Reference Temperature",
       "rdfs:comment": "Temperature at which orifice diameter was measured",
@@ -146,7 +147,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/PipeInsideDiameter",
+      "@id": "jpi:OrificeGasMeter/PipeInsideDiameter",
       "@type": "sm:Property",
       "rdfs:label": "Pipe Inside Diameter",
       "rdfs:comment": "Internal diameter of meter tube",
@@ -155,7 +156,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/PipeMaterial",
+      "@id": "jpi:OrificeGasMeter/PipeMaterial",
       "@type": "sm:Property",
       "rdfs:label": "Pipe Material",
       "rdfs:comment": "Material of meter tube",
@@ -164,7 +165,7 @@
       "sm:enumeration": ["Carbon_Steel", "Stainless_Steel_304", "Stainless_Steel_316"]
     },
     {
-      "@id": "sm:OrificeGasMeter/PipeReferenceTemperature",
+      "@id": "jpi:OrificeGasMeter/PipeReferenceTemperature",
       "@type": "sm:Property",
       "rdfs:label": "Pipe Reference Temperature",
       "rdfs:comment": "Temperature at which pipe diameter was measured",
@@ -173,7 +174,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/IsentropicExponent",
+      "@id": "jpi:OrificeGasMeter/IsentropicExponent",
       "@type": "sm:Property",
       "rdfs:label": "Isentropic Exponent",
       "rdfs:comment": "Gas specific heat ratio (k-value)",
@@ -182,7 +183,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/Viscosity",
+      "@id": "jpi:OrificeGasMeter/Viscosity",
       "@type": "sm:Property",
       "rdfs:label": "Gas Viscosity",
       "rdfs:comment": "Dynamic viscosity of gas",
@@ -191,7 +192,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/FlowExtension",
+      "@id": "jpi:OrificeGasMeter/FlowExtension",
       "@type": "sm:Property",
       "rdfs:label": "Flow Extension Method",
       "rdfs:comment": "Method for extending flow calculations beyond normal ranges",
@@ -200,7 +201,7 @@
       "sm:enumeration": ["Method_1", "Method_2"]
     },
     {
-      "@id": "sm:OrificeGasMeter/AGA8_Units",
+      "@id": "jpi:OrificeGasMeter/AGA8_Units",
       "@type": "sm:Property",
       "rdfs:label": "Gas Composition Units",
       "rdfs:comment": "Units for gas composition values",
@@ -209,7 +210,7 @@
       "sm:enumeration": ["molar_fraction", "mole_percent"]
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_H2",
+      "@id": "jpi:OrificeGasMeter/GasComp_H2",
       "@type": "sm:Property",
       "rdfs:label": "Hydrogen (H2)",
       "rdfs:comment": "Molar fraction of hydrogen",
@@ -218,7 +219,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_He",
+      "@id": "jpi:OrificeGasMeter/GasComp_He",
       "@type": "sm:Property",
       "rdfs:label": "Helium (He)",
       "rdfs:comment": "Molar fraction of helium",
@@ -227,7 +228,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_CO2",
+      "@id": "jpi:OrificeGasMeter/GasComp_CO2",
       "@type": "sm:Property",
       "rdfs:label": "Carbon Dioxide (CO2)",
       "rdfs:comment": "Molar fraction of carbon dioxide",
@@ -236,7 +237,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_H2S",
+      "@id": "jpi:OrificeGasMeter/GasComp_H2S",
       "@type": "sm:Property",
       "rdfs:label": "Hydrogen Sulfide (H2S)",
       "rdfs:comment": "Molar fraction of hydrogen sulfide",
@@ -245,7 +246,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_C1",
+      "@id": "jpi:OrificeGasMeter/GasComp_C1",
       "@type": "sm:Property",
       "rdfs:label": "Methane (C1)",
       "rdfs:comment": "Molar fraction of methane",
@@ -254,7 +255,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_C2",
+      "@id": "jpi:OrificeGasMeter/GasComp_C2",
       "@type": "sm:Property",
       "rdfs:label": "Ethane (C2)",
       "rdfs:comment": "Molar fraction of ethane",
@@ -263,7 +264,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_C3",
+      "@id": "jpi:OrificeGasMeter/GasComp_C3",
       "@type": "sm:Property",
       "rdfs:label": "Propane (C3)",
       "rdfs:comment": "Molar fraction of propane",
@@ -272,7 +273,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_iC4",
+      "@id": "jpi:OrificeGasMeter/GasComp_iC4",
       "@type": "sm:Property",
       "rdfs:label": "Iso-Butane (iC4)",
       "rdfs:comment": "Molar fraction of iso-butane",
@@ -281,7 +282,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_nC4",
+      "@id": "jpi:OrificeGasMeter/GasComp_nC4",
       "@type": "sm:Property",
       "rdfs:label": "N-Butane (nC4)",
       "rdfs:comment": "Molar fraction of n-butane",
@@ -290,7 +291,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_iC5",
+      "@id": "jpi:OrificeGasMeter/GasComp_iC5",
       "@type": "sm:Property",
       "rdfs:label": "Iso-Pentane (iC5)",
       "rdfs:comment": "Molar fraction of iso-pentane",
@@ -299,7 +300,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_nC5",
+      "@id": "jpi:OrificeGasMeter/GasComp_nC5",
       "@type": "sm:Property",
       "rdfs:label": "N-Pentane (nC5)",
       "rdfs:comment": "Molar fraction of n-pentane",
@@ -308,7 +309,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_C6",
+      "@id": "jpi:OrificeGasMeter/GasComp_C6",
       "@type": "sm:Property",
       "rdfs:label": "Hexane (C6)",
       "rdfs:comment": "Molar fraction of hexane",
@@ -317,7 +318,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_C7",
+      "@id": "jpi:OrificeGasMeter/GasComp_C7",
       "@type": "sm:Property",
       "rdfs:label": "Heptane (C7)",
       "rdfs:comment": "Molar fraction of heptane",
@@ -326,7 +327,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_C8",
+      "@id": "jpi:OrificeGasMeter/GasComp_C8",
       "@type": "sm:Property",
       "rdfs:label": "Octane (C8)",
       "rdfs:comment": "Molar fraction of octane",
@@ -335,7 +336,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_C9",
+      "@id": "jpi:OrificeGasMeter/GasComp_C9",
       "@type": "sm:Property",
       "rdfs:label": "Nonane (C9)",
       "rdfs:comment": "Molar fraction of nonane",
@@ -344,7 +345,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_C10",
+      "@id": "jpi:OrificeGasMeter/GasComp_C10",
       "@type": "sm:Property",
       "rdfs:label": "Decane (C10)",
       "rdfs:comment": "Molar fraction of decane",
@@ -353,7 +354,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_N2",
+      "@id": "jpi:OrificeGasMeter/GasComp_N2",
       "@type": "sm:Property",
       "rdfs:label": "Nitrogen (N2)",
       "rdfs:comment": "Molar fraction of nitrogen",
@@ -362,7 +363,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_H2O",
+      "@id": "jpi:OrificeGasMeter/GasComp_H2O",
       "@type": "sm:Property",
       "rdfs:label": "Water (H2O)",
       "rdfs:comment": "Molar fraction of water vapor",
@@ -371,7 +372,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_CO",
+      "@id": "jpi:OrificeGasMeter/GasComp_CO",
       "@type": "sm:Property",
       "rdfs:label": "Carbon Monoxide (CO)",
       "rdfs:comment": "Molar fraction of carbon monoxide",
@@ -380,7 +381,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_O2",
+      "@id": "jpi:OrificeGasMeter/GasComp_O2",
       "@type": "sm:Property",
       "rdfs:label": "Oxygen (O2)",
       "rdfs:comment": "Molar fraction of oxygen",
@@ -389,7 +390,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasComp_Ar",
+      "@id": "jpi:OrificeGasMeter/GasComp_Ar",
       "@type": "sm:Property",
       "rdfs:label": "Argon (Ar)",
       "rdfs:comment": "Molar fraction of argon",
@@ -398,7 +399,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/GasDensity",
+      "@id": "jpi:OrificeGasMeter/GasDensity",
       "@type": "sm:Property",
       "rdfs:label": "Gas Density",
       "rdfs:comment": "Gas density at flowing conditions",
@@ -407,7 +408,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/Compressibility",
+      "@id": "jpi:OrificeGasMeter/Compressibility",
       "@type": "sm:Property",
       "rdfs:label": "Compressibility Factor",
       "rdfs:comment": "Gas compressibility factor (Z-factor)",
@@ -416,7 +417,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/DPSensor_Source",
+      "@id": "jpi:OrificeGasMeter/DPSensor_Source",
       "@type": "sm:Property",
       "rdfs:label": "DP Sensor Source",
       "rdfs:comment": "Type or model of differential pressure sensor",
@@ -424,7 +425,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/DPSensor_SerialNumber",
+      "@id": "jpi:OrificeGasMeter/DPSensor_SerialNumber",
       "@type": "sm:Property",
       "rdfs:label": "DP Sensor Serial Number",
       "rdfs:comment": "Serial number of DP sensor",
@@ -432,7 +433,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/DPSensor_MinRange",
+      "@id": "jpi:OrificeGasMeter/DPSensor_MinRange",
       "@type": "sm:Property",
       "rdfs:label": "DP Sensor Min Range",
       "rdfs:comment": "Minimum measurable differential pressure",
@@ -441,7 +442,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/DPSensor_MaxRange",
+      "@id": "jpi:OrificeGasMeter/DPSensor_MaxRange",
       "@type": "sm:Property",
       "rdfs:label": "DP Sensor Max Range",
       "rdfs:comment": "Maximum measurable differential pressure",
@@ -450,7 +451,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/StaticPressureSensor_Source",
+      "@id": "jpi:OrificeGasMeter/StaticPressureSensor_Source",
       "@type": "sm:Property",
       "rdfs:label": "Static Pressure Sensor Source",
       "rdfs:comment": "Type or model of static pressure sensor",
@@ -458,7 +459,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/StaticPressureSensor_SerialNumber",
+      "@id": "jpi:OrificeGasMeter/StaticPressureSensor_SerialNumber",
       "@type": "sm:Property",
       "rdfs:label": "Static Pressure Sensor Serial Number",
       "rdfs:comment": "Serial number of static pressure sensor",
@@ -466,7 +467,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/StaticPressureSensor_MinRange",
+      "@id": "jpi:OrificeGasMeter/StaticPressureSensor_MinRange",
       "@type": "sm:Property",
       "rdfs:label": "Static Pressure Sensor Min Range",
       "rdfs:comment": "Minimum measurable static pressure",
@@ -475,7 +476,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/StaticPressureSensor_MaxRange",
+      "@id": "jpi:OrificeGasMeter/StaticPressureSensor_MaxRange",
       "@type": "sm:Property",
       "rdfs:label": "Static Pressure Sensor Max Range",
       "rdfs:comment": "Maximum measurable static pressure",
@@ -484,7 +485,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/StaticPressureSensor_TapLocation",
+      "@id": "jpi:OrificeGasMeter/StaticPressureSensor_TapLocation",
       "@type": "sm:Property",
       "rdfs:label": "Static Pressure Tap Location",
       "rdfs:comment": "Location of static pressure tap relative to orifice",
@@ -493,7 +494,7 @@
       "sm:enumeration": ["upstream", "downstream"]
     },
     {
-      "@id": "sm:OrificeGasMeter/StaticPressureSensor_Type",
+      "@id": "jpi:OrificeGasMeter/StaticPressureSensor_Type",
       "@type": "sm:Property",
       "rdfs:label": "Static Pressure Sensor Type",
       "rdfs:comment": "Type of pressure measurement",
@@ -502,7 +503,7 @@
       "sm:enumeration": ["gauge", "absolute"]
     },
     {
-      "@id": "sm:OrificeGasMeter/TempSensor_Source",
+      "@id": "jpi:OrificeGasMeter/TempSensor_Source",
       "@type": "sm:Property",
       "rdfs:label": "Temperature Sensor Source",
       "rdfs:comment": "Type or model of temperature sensor",
@@ -510,7 +511,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/TempSensor_SerialNumber",
+      "@id": "jpi:OrificeGasMeter/TempSensor_SerialNumber",
       "@type": "sm:Property",
       "rdfs:label": "Temperature Sensor Serial Number",
       "rdfs:comment": "Serial number of temperature sensor",
@@ -518,7 +519,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/TempSensor_MinRange",
+      "@id": "jpi:OrificeGasMeter/TempSensor_MinRange",
       "@type": "sm:Property",
       "rdfs:label": "Temperature Sensor Min Range",
       "rdfs:comment": "Minimum measurable temperature",
@@ -527,7 +528,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/TempSensor_MaxRange",
+      "@id": "jpi:OrificeGasMeter/TempSensor_MaxRange",
       "@type": "sm:Property",
       "rdfs:label": "Temperature Sensor Max Range",
       "rdfs:comment": "Maximum measurable temperature",
@@ -536,7 +537,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/FlowRate",
+      "@id": "jpi:OrificeGasMeter/FlowRate",
       "@type": "sm:Property",
       "rdfs:label": "Flow Rate",
       "rdfs:comment": "Current volumetric flow rate",
@@ -545,7 +546,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/DifferentialPressure",
+      "@id": "jpi:OrificeGasMeter/DifferentialPressure",
       "@type": "sm:Property",
       "rdfs:label": "Differential Pressure",
       "rdfs:comment": "Measured pressure drop across orifice plate",
@@ -554,7 +555,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/StaticPressure",
+      "@id": "jpi:OrificeGasMeter/StaticPressure",
       "@type": "sm:Property",
       "rdfs:label": "Static Pressure",
       "rdfs:comment": "Measured line pressure",
@@ -563,7 +564,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/Temperature",
+      "@id": "jpi:OrificeGasMeter/Temperature",
       "@type": "sm:Property",
       "rdfs:label": "Flowing Temperature",
       "rdfs:comment": "Measured gas temperature",
@@ -572,7 +573,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/SpecificGravity",
+      "@id": "jpi:OrificeGasMeter/SpecificGravity",
       "@type": "sm:Property",
       "rdfs:label": "Specific Gravity",
       "rdfs:comment": "Gas specific gravity (relative to air)",
@@ -581,7 +582,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/EnergyFlowRate",
+      "@id": "jpi:OrificeGasMeter/EnergyFlowRate",
       "@type": "sm:Property",
       "rdfs:label": "Energy Flow Rate",
       "rdfs:comment": "Current energy flow rate",
@@ -590,7 +591,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/AccumulatedVolume",
+      "@id": "jpi:OrificeGasMeter/AccumulatedVolume",
       "@type": "sm:Property",
       "rdfs:label": "Accumulated Volume",
       "rdfs:comment": "Total accumulated gas volume",
@@ -599,7 +600,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/AccumulatedEnergy",
+      "@id": "jpi:OrificeGasMeter/AccumulatedEnergy",
       "@type": "sm:Property",
       "rdfs:label": "Accumulated Energy",
       "rdfs:comment": "Total accumulated energy",
@@ -608,7 +609,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/HeatingValue",
+      "@id": "jpi:OrificeGasMeter/HeatingValue",
       "@type": "sm:Property",
       "rdfs:label": "Heating Value",
       "rdfs:comment": "Gas heating value (HHV or LHV)",
@@ -617,7 +618,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:OrificeGasMeter/Status",
+      "@id": "jpi:OrificeGasMeter/Status",
       "@type": "sm:Property",
       "rdfs:label": "Meter Status",
       "rdfs:comment": "Overall meter operational status",
@@ -628,52 +629,54 @@
   ],
   "sm:alarms": [
     {
-      "@id": "sm:OrificeGasMeter/Alarm/HighDP",
+      "@id": "jpi:OrificeGasMeter/Alarm/HighDP",
       "@type": "sm:Alarm",
       "rdfs:label": "High Differential Pressure",
       "rdfs:comment": "DP exceeds configured high limit"
     },
     {
-      "@id": "sm:OrificeGasMeter/Alarm/LowDP",
+      "@id": "jpi:OrificeGasMeter/Alarm/LowDP",
       "@type": "sm:Alarm",
       "rdfs:label": "Low Differential Pressure",
       "rdfs:comment": "DP below configured low limit"
     },
     {
-      "@id": "sm:OrificeGasMeter/Alarm/HighStaticPressure",
+      "@id": "jpi:OrificeGasMeter/Alarm/HighStaticPressure",
       "@type": "sm:Alarm",
       "rdfs:label": "High Static Pressure",
       "rdfs:comment": "Static pressure exceeds high limit"
     },
     {
-      "@id": "sm:OrificeGasMeter/Alarm/LowStaticPressure",
+      "@id": "jpi:OrificeGasMeter/Alarm/LowStaticPressure",
       "@type": "sm:Alarm",
       "rdfs:label": "Low Static Pressure",
       "rdfs:comment": "Static pressure below low limit"
     },
     {
-      "@id": "sm:OrificeGasMeter/Alarm/HighTemperature",
+      "@id": "jpi:OrificeGasMeter/Alarm/HighTemperature",
       "@type": "sm:Alarm",
       "rdfs:label": "High Temperature",
       "rdfs:comment": "Temperature exceeds high limit"
     },
     {
-      "@id": "sm:OrificeGasMeter/Alarm/LowTemperature",
+      "@id": "jpi:OrificeGasMeter/Alarm/LowTemperature",
       "@type": "sm:Alarm",
       "rdfs:label": "Low Temperature",
       "rdfs:comment": "Temperature below low limit"
     },
     {
-      "@id": "sm:OrificeGasMeter/Alarm/CommsFault",
+      "@id": "jpi:OrificeGasMeter/Alarm/CommsFault",
       "@type": "sm:Alarm",
       "rdfs:label": "Communications Fault",
       "rdfs:comment": "Loss of communication with meter"
     },
     {
-      "@id": "sm:OrificeGasMeter/Alarm/SensorOutOfRange",
+      "@id": "jpi:OrificeGasMeter/Alarm/SensorOutOfRange",
       "@type": "sm:Alarm",
       "rdfs:label": "Sensor Out of Range",
       "rdfs:comment": "One or more sensor readings outside calibrated range"
     }
   ]
 }
+
+

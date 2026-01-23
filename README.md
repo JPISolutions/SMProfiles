@@ -1,6 +1,10 @@
 # Gas Flow Computer SM Profiles
 
-CESMII Smart Manufacturing profiles for gas flow measurement systems following AGA-3 and AGA-8 standards.
+**CESMII Smart Manufacturing profiles for gas flow measurement systems following AGA-3 and AGA-8 standards.**
+
+Designed for JSON data exchange via MQTT, REST APIs, and other IoT protocols. Perfect for oil & gas SCADA systems, particularly those using Ignition with FloBoss, TotalFlow, or custom flow computers.
+
+📖 **[Setup Instructions](SETUP.md)** | 🤝 **[Contributing](CONTRIBUTING.md)** | 📚 **[Documentation](docs/)**
 
 ## Architecture
 
@@ -80,26 +84,43 @@ SMProfiles/
 
 ## Quick Start
 
-**1. Setup Python environment:**
+**1. Clone and setup:**
+```bash
+git clone https://github.com/JPISolutions/SMProfiles.git
+cd SMProfiles
+# Follow SETUP.md for one-time configuration
+```
+
+**2. Reference profiles in your JSON payloads:**
+```json
+{
+  "@type": "jpi:FlowComputer",
+  "@context": "https://github.com/JPISolutions/SMProfiles/profiles/v1#",
+  "DeviceName": "BATTERY-12-FC",
+  "NumberOfRuns": 3,
+  ...
+}
+```
+
+**3. Validate profiles:**
 ```bash
 cd tools
-setup.bat
-venv\Scripts\activate.bat
+python validate_profile.py ../profiles/flow_computer.jsonld
 ```
 
-**2. Validate profiles:**
-```bash
-python validate_profile.py ..\profiles\flow_computer.jsonld
-python validate_profile.py ..\profiles\meter_run.jsonld
-python validate_profile.py ..\profiles\orifice_gas_meter.jsonld
+**4. View complete example:**
+See `examples/flow_computer_instance.jsonld` for a full flow computer with multiple runs.
+
+## Namespace
+
+All profiles use the GitHub-based namespace:
+```
+https://github.com/JPISolutions/SMProfiles/profiles/v1#
 ```
 
-**3. View complete example:**
-```bash
-type ..\examples\flow_computer_instance.jsonld
-```
+Abbreviated as `jpi:` in JSON-LD context.
 
-This shows a FloBoss ROC809 with 3 orifice meter runs (sales, check, flare).
+**Note:** These are JSON-LD profiles for data exchange (MQTT, REST, files). OPC UA NodeSets are not required unless you're implementing OPC UA servers.
 
 ## Example: FlowComputer with Multiple Runs
 

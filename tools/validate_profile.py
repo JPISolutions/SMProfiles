@@ -70,9 +70,9 @@ class SMProfileValidator:
         is_valid = len(self.errors) == 0
         
         if is_valid:
-            logger.info(f"✓ Profile is valid")
+            logger.info("Profile is valid")
         else:
-            logger.error(f"✗ Profile validation failed with {len(self.errors)} error(s)")
+            logger.error(f"Profile validation failed with {len(self.errors)} error(s)")
         
         if self.warnings:
             logger.warning(f"Profile has {len(self.warnings)} warning(s)")
@@ -118,6 +118,9 @@ class SMProfileValidator:
             self.errors.append("sm:properties must be an array")
             return
         
+        # Data types that don't require units
+        unitless_types = ['xsd:string', 'xsd:boolean', 'xsd:integer', 'xsd:dateTime']
+        
         for idx, prop in enumerate(properties):
             if '@id' not in prop:
                 self.errors.append(f"Property {idx} missing @id")
@@ -127,7 +130,10 @@ class SMProfileValidator:
                 self.warnings.append(f"Property {idx} missing label")
             if 'sm:dataType' not in prop:
                 self.warnings.append(f"Property {idx} missing dataType")
-            if 'sm:unit' not in prop and prop.get('sm:dataType') not in ['xsd:string', 'xsd:boolean']:
+            
+            # Only warn about missing units for numeric types that should have them
+            data_type = prop.get('sm:dataType')
+            if 'sm:unit' not in prop and data_type not in unitless_types:
                 self.warnings.append(f"Property {idx} ({prop.get('rdfs:label', 'unknown')}) missing unit")
     
     def _validate_units(self, profile: Dict) -> None:
@@ -171,18 +177,18 @@ def main():
     if errors:
         print("\nERRORS:")
         for error in errors:
-            print(f"  ✗ {error}")
+            print(f"  [ERROR] {error}")
     
     if warnings:
         print("\nWARNINGS:")
         for warning in warnings:
-            print(f"  ⚠ {warning}")
+            print(f"  [WARN] {warning}")
     
     if is_valid:
-        print("\n✓ Profile is valid!")
+        print("\n[PASS] Profile is valid!")
         sys.exit(0)
     else:
-        print("\n✗ Profile validation failed")
+        print("\n[FAIL] Profile validation failed")
         sys.exit(1)
 
 

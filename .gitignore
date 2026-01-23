@@ -6,13 +6,16 @@ __pycache__/
 .Python
 venv/
 env/
+ENV/
 *.egg-info/
 dist/
 build/
+*.egg
 
 # Logs
 *.log
 logs/
+validation.log
 
 # IDE
 .vscode/
@@ -20,10 +23,18 @@ logs/
 *.swp
 *.swo
 *~
+.DS_Store
 
 # OS
-.DS_Store
 Thumbs.db
+desktop.ini
 
 # Validation outputs
 validation_results/
+
+# Temporary files
+*.tmp
+*.bak
+*~
+fix_namespace_temp.py
+update_namespace.py

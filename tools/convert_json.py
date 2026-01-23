@@ -115,7 +115,7 @@ def convert_json_to_sm_profile(json_config: Dict[str, Any], meter_id: str) -> Di
     _add_prop(props, "TempSensor_MinRange", temp_sensor.get('minimumRange'), "unit:DEG_C")
     _add_prop(props, "TempSensor_MaxRange", temp_sensor.get('maximumRange'), "unit:DEG_C")
     
-    logger.info(f"✓ Converted {len(props)} properties")
+    logger.info(f"Converted {len(props)} properties")
     return instance
 
 
@@ -166,7 +166,7 @@ def main():
     try:
         with open(output_path, 'w', encoding='utf-8') as f:
             json.dump(instance, f, indent=2)
-        logger.info(f"✓ Written to: {output_path}")
+        logger.info(f"Written to: {output_path}")
     except Exception as e:
         logger.error(f"Failed to write output: {e}")
         sys.exit(1)

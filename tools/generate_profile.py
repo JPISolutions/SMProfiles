@@ -72,7 +72,7 @@ def create_profile_skeleton(
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(profile, f, indent=2)
     
-    logger.info(f"✓ Profile written to: {output_path}")
+    logger.info(f"Profile written to: {output_path}")
 
 
 def main():
@@ -120,7 +120,7 @@ def main():
     # Generate profile
     try:
         create_profile_skeleton(equipment_name, properties, output_path)
-        print(f"\n✓ Profile generated successfully!")
+        print(f"\n[SUCCESS] Profile generated successfully!")
         print(f"  Location: {output_path}")
         print(f"\nValidate with:")
         print(f"  python validate_profile.py {output_path}")

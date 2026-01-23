@@ -1,12 +1,13 @@
 {
   "@context": {
+    "jpi": "https://github.com/JPISolutions/SMProfiles/profiles/v1#",
     "sm": "http://cesmii.org/sm/",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "unit": "http://qudt.org/vocab/unit/",
     "qudt": "http://qudt.org/schema/qudt/"
   },
-  "@id": "sm:FlowComputer",
+  "@id": "jpi:FlowComputer",
   "@type": "sm:EquipmentType",
   "rdfs:label": "Flow Computer",
   "rdfs:comment": "Generic flow computer/flow measurement device for natural gas metering. Supports multiple meter runs with various meter types. Applicable to FloBoss ROC800/ROC809, TotalFlow G4/G5, SCADA pack implementations, and other flow computer platforms.",
@@ -14,7 +15,7 @@
   "sm:manufacturer": "Multiple",
   "sm:properties": [
     {
-      "@id": "sm:FlowComputer/DeviceName",
+      "@id": "jpi:FlowComputer/DeviceName",
       "@type": "sm:Property",
       "rdfs:label": "Device Name",
       "rdfs:comment": "User-configured name for the flow computer",
@@ -22,7 +23,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/Manufacturer",
+      "@id": "jpi:FlowComputer/Manufacturer",
       "@type": "sm:Property",
       "rdfs:label": "Manufacturer",
       "rdfs:comment": "Device manufacturer",
@@ -31,7 +32,7 @@
       "sm:enumeration": ["Emerson", "ABB", "Yokogawa", "Schneider_Electric", "Custom"]
     },
     {
-      "@id": "sm:FlowComputer/Model",
+      "@id": "jpi:FlowComputer/Model",
       "@type": "sm:Property",
       "rdfs:label": "Model",
       "rdfs:comment": "Device model number",
@@ -39,7 +40,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/SerialNumber",
+      "@id": "jpi:FlowComputer/SerialNumber",
       "@type": "sm:Property",
       "rdfs:label": "Serial Number",
       "rdfs:comment": "Device serial number",
@@ -47,7 +48,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/FirmwareVersion",
+      "@id": "jpi:FlowComputer/FirmwareVersion",
       "@type": "sm:Property",
       "rdfs:label": "Firmware Version",
       "rdfs:comment": "Current firmware/software version",
@@ -55,7 +56,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/HardwareRevision",
+      "@id": "jpi:FlowComputer/HardwareRevision",
       "@type": "sm:Property",
       "rdfs:label": "Hardware Revision",
       "rdfs:comment": "Hardware revision number",
@@ -63,7 +64,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/IPAddress",
+      "@id": "jpi:FlowComputer/IPAddress",
       "@type": "sm:Property",
       "rdfs:label": "IP Address",
       "rdfs:comment": "Device IP address",
@@ -71,7 +72,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/MACAddress",
+      "@id": "jpi:FlowComputer/MACAddress",
       "@type": "sm:Property",
       "rdfs:label": "MAC Address",
       "rdfs:comment": "Device MAC address",
@@ -79,7 +80,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/SubnetMask",
+      "@id": "jpi:FlowComputer/SubnetMask",
       "@type": "sm:Property",
       "rdfs:label": "Subnet Mask",
       "rdfs:comment": "Network subnet mask",
@@ -87,7 +88,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/Gateway",
+      "@id": "jpi:FlowComputer/Gateway",
       "@type": "sm:Property",
       "rdfs:label": "Gateway",
       "rdfs:comment": "Network gateway address",
@@ -95,7 +96,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/ModbusAddress",
+      "@id": "jpi:FlowComputer/ModbusAddress",
       "@type": "sm:Property",
       "rdfs:label": "Modbus Address",
       "rdfs:comment": "Modbus slave address",
@@ -103,7 +104,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/Location",
+      "@id": "jpi:FlowComputer/Location",
       "@type": "sm:Property",
       "rdfs:label": "Location",
       "rdfs:comment": "Physical location description",
@@ -111,7 +112,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/Latitude",
+      "@id": "jpi:FlowComputer/Latitude",
       "@type": "sm:Property",
       "rdfs:label": "Latitude",
       "rdfs:comment": "Geographic latitude",
@@ -120,7 +121,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/Longitude",
+      "@id": "jpi:FlowComputer/Longitude",
       "@type": "sm:Property",
       "rdfs:label": "Longitude",
       "rdfs:comment": "Geographic longitude",
@@ -129,7 +130,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/Elevation",
+      "@id": "jpi:FlowComputer/Elevation",
       "@type": "sm:Property",
       "rdfs:label": "Elevation",
       "rdfs:comment": "Elevation above sea level",
@@ -138,7 +139,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/TimeZone",
+      "@id": "jpi:FlowComputer/TimeZone",
       "@type": "sm:Property",
       "rdfs:label": "Time Zone",
       "rdfs:comment": "Device time zone",
@@ -146,7 +147,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/CurrentDateTime",
+      "@id": "jpi:FlowComputer/CurrentDateTime",
       "@type": "sm:Property",
       "rdfs:label": "Current Date/Time",
       "rdfs:comment": "Device current date and time",
@@ -154,7 +155,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/Uptime",
+      "@id": "jpi:FlowComputer/Uptime",
       "@type": "sm:Property",
       "rdfs:label": "Uptime",
       "rdfs:comment": "Device uptime in seconds",
@@ -163,7 +164,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/NumberOfRuns",
+      "@id": "jpi:FlowComputer/NumberOfRuns",
       "@type": "sm:Property",
       "rdfs:label": "Number of Runs",
       "rdfs:comment": "Number of meter runs configured on this device",
@@ -171,7 +172,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/ContractHour",
+      "@id": "jpi:FlowComputer/ContractHour",
       "@type": "sm:Property",
       "rdfs:label": "Contract Hour",
       "rdfs:comment": "Hour of day when daily volumes roll over (0-23)",
@@ -179,7 +180,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/AtmosphericPressure",
+      "@id": "jpi:FlowComputer/AtmosphericPressure",
       "@type": "sm:Property",
       "rdfs:label": "Atmospheric Pressure",
       "rdfs:comment": "Local atmospheric pressure",
@@ -188,7 +189,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/CPULoad",
+      "@id": "jpi:FlowComputer/CPULoad",
       "@type": "sm:Property",
       "rdfs:label": "CPU Load",
       "rdfs:comment": "Current CPU utilization percentage",
@@ -197,7 +198,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/MemoryUsed",
+      "@id": "jpi:FlowComputer/MemoryUsed",
       "@type": "sm:Property",
       "rdfs:label": "Memory Used",
       "rdfs:comment": "Current memory usage percentage",
@@ -206,7 +207,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/BatteryVoltage",
+      "@id": "jpi:FlowComputer/BatteryVoltage",
       "@type": "sm:Property",
       "rdfs:label": "Battery Voltage",
       "rdfs:comment": "Backup battery voltage",
@@ -215,7 +216,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/PowerSupplyVoltage",
+      "@id": "jpi:FlowComputer/PowerSupplyVoltage",
       "@type": "sm:Property",
       "rdfs:label": "Power Supply Voltage",
       "rdfs:comment": "Main power supply voltage",
@@ -224,7 +225,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/AmbientTemperature",
+      "@id": "jpi:FlowComputer/AmbientTemperature",
       "@type": "sm:Property",
       "rdfs:label": "Ambient Temperature",
       "rdfs:comment": "Internal/ambient temperature of the device enclosure",
@@ -233,7 +234,7 @@
       "sm:accessMode": "read"
     },
     {
-      "@id": "sm:FlowComputer/Status",
+      "@id": "jpi:FlowComputer/Status",
       "@type": "sm:Property",
       "rdfs:label": "Device Status",
       "rdfs:comment": "Overall device operational status",
@@ -242,7 +243,7 @@
       "sm:enumeration": ["Normal", "Warning", "Alarm", "Fault", "Offline"]
     },
     {
-      "@id": "sm:FlowComputer/ActiveAlarmCount",
+      "@id": "jpi:FlowComputer/ActiveAlarmCount",
       "@type": "sm:Property",
       "rdfs:label": "Active Alarm Count",
       "rdfs:comment": "Number of active alarms on device",
@@ -252,49 +253,49 @@
   ],
   "sm:alarms": [
     {
-      "@id": "sm:FlowComputer/Alarm/CommunicationsFault",
+      "@id": "jpi:FlowComputer/Alarm/CommunicationsFault",
       "@type": "sm:Alarm",
       "rdfs:label": "Communications Fault",
       "rdfs:comment": "Loss of communication with flow computer"
     },
     {
-      "@id": "sm:FlowComputer/Alarm/PowerFailure",
+      "@id": "jpi:FlowComputer/Alarm/PowerFailure",
       "@type": "sm:Alarm",
       "rdfs:label": "Power Failure",
       "rdfs:comment": "Main power supply failure"
     },
     {
-      "@id": "sm:FlowComputer/Alarm/LowBattery",
+      "@id": "jpi:FlowComputer/Alarm/LowBattery",
       "@type": "sm:Alarm",
       "rdfs:label": "Low Battery",
       "rdfs:comment": "Backup battery voltage low"
     },
     {
-      "@id": "sm:FlowComputer/Alarm/HighCPULoad",
+      "@id": "jpi:FlowComputer/Alarm/HighCPULoad",
       "@type": "sm:Alarm",
       "rdfs:label": "High CPU Load",
       "rdfs:comment": "CPU utilization exceeds threshold"
     },
     {
-      "@id": "sm:FlowComputer/Alarm/MemoryFull",
+      "@id": "jpi:FlowComputer/Alarm/MemoryFull",
       "@type": "sm:Alarm",
       "rdfs:label": "Memory Full",
       "rdfs:comment": "Device memory usage critical"
     },
     {
-      "@id": "sm:FlowComputer/Alarm/ClockError",
+      "@id": "jpi:FlowComputer/Alarm/ClockError",
       "@type": "sm:Alarm",
       "rdfs:label": "Clock Error",
       "rdfs:comment": "Device time/date error or drift"
     },
     {
-      "@id": "sm:FlowComputer/Alarm/ConfigurationError",
+      "@id": "jpi:FlowComputer/Alarm/ConfigurationError",
       "@type": "sm:Alarm",
       "rdfs:label": "Configuration Error",
       "rdfs:comment": "Device configuration invalid or corrupted"
     },
     {
-      "@id": "sm:FlowComputer/Alarm/HighTemperature",
+      "@id": "jpi:FlowComputer/Alarm/HighTemperature",
       "@type": "sm:Alarm",
       "rdfs:label": "High Temperature",
       "rdfs:comment": "Device internal temperature exceeds limit"
@@ -302,11 +303,11 @@
   ],
   "sm:relationships": [
     {
-      "@id": "sm:FlowComputer/hasRun",
+      "@id": "jpi:FlowComputer/hasRun",
       "@type": "sm:Relationship",
       "rdfs:label": "Has Meter Run",
       "rdfs:comment": "Flow computer contains one or more meter runs",
-      "sm:targetType": "sm:MeterRun",
+      "sm:targetType": "jpi:MeterRun",
       "sm:cardinality": "oneToMany"
     }
   ]
