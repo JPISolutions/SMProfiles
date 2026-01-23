@@ -1,0 +1,313 @@
+{
+  "@context": {
+    "sm": "http://cesmii.org/sm/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "unit": "http://qudt.org/vocab/unit/",
+    "qudt": "http://qudt.org/schema/qudt/"
+  },
+  "@id": "sm:FlowComputer",
+  "@type": "sm:EquipmentType",
+  "rdfs:label": "Flow Computer",
+  "rdfs:comment": "Generic flow computer/flow measurement device for natural gas metering. Supports multiple meter runs with various meter types. Applicable to FloBoss ROC800/ROC809, TotalFlow G4/G5, SCADA pack implementations, and other flow computer platforms.",
+  "sm:version": "0.1.0",
+  "sm:manufacturer": "Multiple",
+  "sm:properties": [
+    {
+      "@id": "sm:FlowComputer/DeviceName",
+      "@type": "sm:Property",
+      "rdfs:label": "Device Name",
+      "rdfs:comment": "User-configured name for the flow computer",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/Manufacturer",
+      "@type": "sm:Property",
+      "rdfs:label": "Manufacturer",
+      "rdfs:comment": "Device manufacturer",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["Emerson", "ABB", "Yokogawa", "Schneider_Electric", "Custom"]
+    },
+    {
+      "@id": "sm:FlowComputer/Model",
+      "@type": "sm:Property",
+      "rdfs:label": "Model",
+      "rdfs:comment": "Device model number",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/SerialNumber",
+      "@type": "sm:Property",
+      "rdfs:label": "Serial Number",
+      "rdfs:comment": "Device serial number",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/FirmwareVersion",
+      "@type": "sm:Property",
+      "rdfs:label": "Firmware Version",
+      "rdfs:comment": "Current firmware/software version",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/HardwareRevision",
+      "@type": "sm:Property",
+      "rdfs:label": "Hardware Revision",
+      "rdfs:comment": "Hardware revision number",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/IPAddress",
+      "@type": "sm:Property",
+      "rdfs:label": "IP Address",
+      "rdfs:comment": "Device IP address",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/MACAddress",
+      "@type": "sm:Property",
+      "rdfs:label": "MAC Address",
+      "rdfs:comment": "Device MAC address",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/SubnetMask",
+      "@type": "sm:Property",
+      "rdfs:label": "Subnet Mask",
+      "rdfs:comment": "Network subnet mask",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/Gateway",
+      "@type": "sm:Property",
+      "rdfs:label": "Gateway",
+      "rdfs:comment": "Network gateway address",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/ModbusAddress",
+      "@type": "sm:Property",
+      "rdfs:label": "Modbus Address",
+      "rdfs:comment": "Modbus slave address",
+      "sm:dataType": "xsd:integer",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/Location",
+      "@type": "sm:Property",
+      "rdfs:label": "Location",
+      "rdfs:comment": "Physical location description",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/Latitude",
+      "@type": "sm:Property",
+      "rdfs:label": "Latitude",
+      "rdfs:comment": "Geographic latitude",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:DEG",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/Longitude",
+      "@type": "sm:Property",
+      "rdfs:label": "Longitude",
+      "rdfs:comment": "Geographic longitude",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:DEG",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/Elevation",
+      "@type": "sm:Property",
+      "rdfs:label": "Elevation",
+      "rdfs:comment": "Elevation above sea level",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:M",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/TimeZone",
+      "@type": "sm:Property",
+      "rdfs:label": "Time Zone",
+      "rdfs:comment": "Device time zone",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/CurrentDateTime",
+      "@type": "sm:Property",
+      "rdfs:label": "Current Date/Time",
+      "rdfs:comment": "Device current date and time",
+      "sm:dataType": "xsd:dateTime",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/Uptime",
+      "@type": "sm:Property",
+      "rdfs:label": "Uptime",
+      "rdfs:comment": "Device uptime in seconds",
+      "sm:dataType": "xsd:integer",
+      "sm:unit": "unit:SEC",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/NumberOfRuns",
+      "@type": "sm:Property",
+      "rdfs:label": "Number of Runs",
+      "rdfs:comment": "Number of meter runs configured on this device",
+      "sm:dataType": "xsd:integer",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/ContractHour",
+      "@type": "sm:Property",
+      "rdfs:label": "Contract Hour",
+      "rdfs:comment": "Hour of day when daily volumes roll over (0-23)",
+      "sm:dataType": "xsd:integer",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/AtmosphericPressure",
+      "@type": "sm:Property",
+      "rdfs:label": "Atmospheric Pressure",
+      "rdfs:comment": "Local atmospheric pressure",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:KiloPA",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/CPULoad",
+      "@type": "sm:Property",
+      "rdfs:label": "CPU Load",
+      "rdfs:comment": "Current CPU utilization percentage",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:PERCENT",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/MemoryUsed",
+      "@type": "sm:Property",
+      "rdfs:label": "Memory Used",
+      "rdfs:comment": "Current memory usage percentage",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:PERCENT",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/BatteryVoltage",
+      "@type": "sm:Property",
+      "rdfs:label": "Battery Voltage",
+      "rdfs:comment": "Backup battery voltage",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:V",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/PowerSupplyVoltage",
+      "@type": "sm:Property",
+      "rdfs:label": "Power Supply Voltage",
+      "rdfs:comment": "Main power supply voltage",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:V",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/AmbientTemperature",
+      "@type": "sm:Property",
+      "rdfs:label": "Ambient Temperature",
+      "rdfs:comment": "Internal/ambient temperature of the device enclosure",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:DEG_C",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:FlowComputer/Status",
+      "@type": "sm:Property",
+      "rdfs:label": "Device Status",
+      "rdfs:comment": "Overall device operational status",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["Normal", "Warning", "Alarm", "Fault", "Offline"]
+    },
+    {
+      "@id": "sm:FlowComputer/ActiveAlarmCount",
+      "@type": "sm:Property",
+      "rdfs:label": "Active Alarm Count",
+      "rdfs:comment": "Number of active alarms on device",
+      "sm:dataType": "xsd:integer",
+      "sm:accessMode": "read"
+    }
+  ],
+  "sm:alarms": [
+    {
+      "@id": "sm:FlowComputer/Alarm/CommunicationsFault",
+      "@type": "sm:Alarm",
+      "rdfs:label": "Communications Fault",
+      "rdfs:comment": "Loss of communication with flow computer"
+    },
+    {
+      "@id": "sm:FlowComputer/Alarm/PowerFailure",
+      "@type": "sm:Alarm",
+      "rdfs:label": "Power Failure",
+      "rdfs:comment": "Main power supply failure"
+    },
+    {
+      "@id": "sm:FlowComputer/Alarm/LowBattery",
+      "@type": "sm:Alarm",
+      "rdfs:label": "Low Battery",
+      "rdfs:comment": "Backup battery voltage low"
+    },
+    {
+      "@id": "sm:FlowComputer/Alarm/HighCPULoad",
+      "@type": "sm:Alarm",
+      "rdfs:label": "High CPU Load",
+      "rdfs:comment": "CPU utilization exceeds threshold"
+    },
+    {
+      "@id": "sm:FlowComputer/Alarm/MemoryFull",
+      "@type": "sm:Alarm",
+      "rdfs:label": "Memory Full",
+      "rdfs:comment": "Device memory usage critical"
+    },
+    {
+      "@id": "sm:FlowComputer/Alarm/ClockError",
+      "@type": "sm:Alarm",
+      "rdfs:label": "Clock Error",
+      "rdfs:comment": "Device time/date error or drift"
+    },
+    {
+      "@id": "sm:FlowComputer/Alarm/ConfigurationError",
+      "@type": "sm:Alarm",
+      "rdfs:label": "Configuration Error",
+      "rdfs:comment": "Device configuration invalid or corrupted"
+    },
+    {
+      "@id": "sm:FlowComputer/Alarm/HighTemperature",
+      "@type": "sm:Alarm",
+      "rdfs:label": "High Temperature",
+      "rdfs:comment": "Device internal temperature exceeds limit"
+    }
+  ],
+  "sm:relationships": [
+    {
+      "@id": "sm:FlowComputer/hasRun",
+      "@type": "sm:Relationship",
+      "rdfs:label": "Has Meter Run",
+      "rdfs:comment": "Flow computer contains one or more meter runs",
+      "sm:targetType": "sm:MeterRun",
+      "sm:cardinality": "oneToMany"
+    }
+  ]
+}

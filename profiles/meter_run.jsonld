@@ -1,0 +1,94 @@
+{
+  "@context": {
+    "sm": "http://cesmii.org/sm/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "unit": "http://qudt.org/vocab/unit/",
+    "qudt": "http://qudt.org/schema/qudt/"
+  },
+  "@id": "sm:MeterRun",
+  "@type": "sm:EquipmentType",
+  "rdfs:label": "Meter Run",
+  "rdfs:comment": "Generic meter run on a flow computer. A meter run represents a single measurement point with associated instrumentation and calculations. Can contain different meter types (orifice, turbine, ultrasonic, coriolis, etc.).",
+  "sm:version": "0.1.0",
+  "sm:properties": [
+    {
+      "@id": "sm:MeterRun/RunNumber",
+      "@type": "sm:Property",
+      "rdfs:label": "Run Number",
+      "rdfs:comment": "Run number or identifier (typically 1-8 or 1-16 depending on device)",
+      "sm:dataType": "xsd:integer",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:MeterRun/RunName",
+      "@type": "sm:Property",
+      "rdfs:label": "Run Name",
+      "rdfs:comment": "User-configured name for this meter run",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:MeterRun/MeterType",
+      "@type": "sm:Property",
+      "rdfs:label": "Meter Type",
+      "rdfs:comment": "Type of meter installed on this run",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["Orifice", "Turbine", "Ultrasonic", "Coriolis", "Rotary", "Vortex", "None"]
+    },
+    {
+      "@id": "sm:MeterRun/Enabled",
+      "@type": "sm:Property",
+      "rdfs:label": "Enabled",
+      "rdfs:comment": "Whether this run is enabled/active",
+      "sm:dataType": "xsd:boolean",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:MeterRun/FlowDirection",
+      "@type": "sm:Property",
+      "rdfs:label": "Flow Direction",
+      "rdfs:comment": "Direction of flow measurement",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["Forward", "Reverse", "Bidirectional"]
+    },
+    {
+      "@id": "sm:MeterRun/Owner",
+      "@type": "sm:Property",
+      "rdfs:label": "Owner",
+      "rdfs:comment": "Owner or operator of this meter run",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:MeterRun/Purpose",
+      "@type": "sm:Property",
+      "rdfs:label": "Purpose",
+      "rdfs:comment": "Purpose of meter run (sales, allocation, check, etc.)",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["Sales", "Receipt", "Allocation", "Check", "Flare", "Fuel", "Other"]
+    },
+    {
+      "@id": "sm:MeterRun/Status",
+      "@type": "sm:Property",
+      "rdfs:label": "Run Status",
+      "rdfs:comment": "Current operational status of the meter run",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["Normal", "Alarm", "Fault", "Disabled", "NoFlow"]
+    }
+  ],
+  "sm:relationships": [
+    {
+      "@id": "sm:MeterRun/hasMeterConfiguration",
+      "@type": "sm:Relationship",
+      "rdfs:label": "Has Meter Configuration",
+      "rdfs:comment": "Meter run has associated meter-specific configuration (OrificeGasMeter, TurbineMeter, etc.)",
+      "sm:targetType": ["sm:OrificeGasMeter", "sm:TurbineMeter", "sm:UltrasonicMeter"],
+      "sm:cardinality": "oneToOne"
+    }
+  ]
+}

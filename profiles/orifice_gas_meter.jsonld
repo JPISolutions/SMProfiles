@@ -9,7 +9,7 @@
   "@id": "sm:OrificeGasMeter",
   "@type": "sm:EquipmentType",
   "rdfs:label": "Orifice Gas Meter",
-  "rdfs:comment": "Generic orifice gas flow meter for natural gas measurement following AGA-3 and AGA-8 standards. Applicable to FloBoss, TotalFlow, SCADA pack, and other flow computer implementations.",
+  "rdfs:comment": "Configuration and measurements for orifice gas meters following AGA-3 and AGA-8 standards. This profile represents the meter-specific data for an orifice meter run on a flow computer. Applicable to FloBoss, TotalFlow, SCADA pack, and other flow computer implementations.",
   "sm:version": "0.2.0",
   "sm:manufacturer": "Multiple",
   "sm:properties": [
