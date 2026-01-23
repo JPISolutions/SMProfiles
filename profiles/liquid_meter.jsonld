@@ -1,0 +1,479 @@
+{
+  "@context": {
+    "jpi": "https://github.com/JPISolutions/SMProfiles/profiles/v1#",
+    "sm": "http://cesmii.org/sm/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "unit": "http://qudt.org/vocab/unit/",
+    "qudt": "http://qudt.org/schema/qudt/"
+  },
+  "@id": "jpi:LiquidMeter",
+  "@type": "sm:EquipmentType",
+  "rdfs:label": "Liquid Meter",
+  "rdfs:comment": "Configuration and measurements for liquid meters including turbine, positive displacement, and mass meters. Supports crude oil, condensate, water, and other liquid hydrocarbon measurement. No compression calculations required.",
+  "sm:version": "0.1.0",
+  "sm:manufacturer": "Multiple",
+  "sm:properties": [
+    {
+      "@id": "jpi:LiquidMeter/Name",
+      "@type": "sm:Property",
+      "rdfs:label": "Meter Name",
+      "rdfs:comment": "Identifier for the meter",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Owner",
+      "@type": "sm:Property",
+      "rdfs:label": "Owner",
+      "rdfs:comment": "Owner or operator of the meter",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/MeterType",
+      "@type": "sm:Property",
+      "rdfs:label": "Meter Type",
+      "rdfs:comment": "Physical meter technology type",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["Turbine", "Positive_Displacement", "Coriolis", "Ultrasonic", "Magnetic"]
+    },
+    {
+      "@id": "jpi:LiquidMeter/FluidType",
+      "@type": "sm:Property",
+      "rdfs:label": "Fluid Type",
+      "rdfs:comment": "Type of liquid being measured",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["Crude_Oil", "Condensate", "Water", "Natural_Gas_Liquids", "Refined_Products", "Mixed_Liquids"]
+    },
+    {
+      "@id": "jpi:LiquidMeter/Latitude",
+      "@type": "sm:Property",
+      "rdfs:label": "Latitude",
+      "rdfs:comment": "Geographic latitude",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:DEG",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Longitude",
+      "@type": "sm:Property",
+      "rdfs:label": "Longitude",
+      "rdfs:comment": "Geographic longitude",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:DEG",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Elevation",
+      "@type": "sm:Property",
+      "rdfs:label": "Elevation",
+      "rdfs:comment": "Elevation above sea level",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:M",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/BaseTemperature",
+      "@type": "sm:Property",
+      "rdfs:label": "Base Temperature",
+      "rdfs:comment": "Reference temperature for volume correction (typically 15°C or 60°F)",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:DEG_C",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/BasePressure",
+      "@type": "sm:Property",
+      "rdfs:label": "Base Pressure",
+      "rdfs:comment": "Reference pressure for volume correction (typically 101.325 kPa)",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:KiloPA",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Units",
+      "@type": "sm:Property",
+      "rdfs:label": "Unit System",
+      "rdfs:comment": "Measurement unit system",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["metric", "imperial"]
+    },
+    {
+      "@id": "jpi:LiquidMeter/ContractHour",
+      "@type": "sm:Property",
+      "rdfs:label": "Contract Hour",
+      "rdfs:comment": "Hour of day when daily volumes roll over (0-23)",
+      "sm:dataType": "xsd:integer",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/MeterFactor",
+      "@type": "sm:Property",
+      "rdfs:label": "Meter Factor",
+      "rdfs:comment": "Calibration factor applied to raw meter reading",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/KFactor",
+      "@type": "sm:Property",
+      "rdfs:label": "K-Factor",
+      "rdfs:comment": "Meter K-factor (pulses per unit volume) for turbine meters",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/VolumeCorrection",
+      "@type": "sm:Property",
+      "rdfs:label": "Volume Correction Method",
+      "rdfs:comment": "Standard used for temperature/pressure volume correction",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["API_MPMS_11.1", "API_2540", "ISO_91-1", "None"]
+    },
+    {
+      "@id": "jpi:LiquidMeter/Density_Reference",
+      "@type": "sm:Property",
+      "rdfs:label": "Reference Density",
+      "rdfs:comment": "Liquid density at reference conditions",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:KiloGM-PER-M3",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Density_Flowing",
+      "@type": "sm:Property",
+      "rdfs:label": "Flowing Density",
+      "rdfs:comment": "Current liquid density at flowing conditions",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:KiloGM-PER-M3",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/API_Gravity",
+      "@type": "sm:Property",
+      "rdfs:label": "API Gravity",
+      "rdfs:comment": "API gravity of crude/condensate at 60°F",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Viscosity",
+      "@type": "sm:Property",
+      "rdfs:label": "Dynamic Viscosity",
+      "rdfs:comment": "Dynamic viscosity of liquid at flowing conditions",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:CentiPOISE",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/WaterCut",
+      "@type": "sm:Property",
+      "rdfs:label": "Water Cut",
+      "rdfs:comment": "Percentage of water in liquid stream",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:PERCENT",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/BSW",
+      "@type": "sm:Property",
+      "rdfs:label": "BS&W",
+      "rdfs:comment": "Basic sediment and water content",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:PERCENT",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/SaltContent",
+      "@type": "sm:Property",
+      "rdfs:label": "Salt Content",
+      "rdfs:comment": "Salt concentration in crude oil",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:MilliGM-PER-L",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/SulfurContent",
+      "@type": "sm:Property",
+      "rdfs:label": "Sulfur Content",
+      "rdfs:comment": "Sulfur content in crude oil",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:PERCENT",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/ThermalExpansionCoeff",
+      "@type": "sm:Property",
+      "rdfs:label": "Thermal Expansion Coefficient",
+      "rdfs:comment": "Coefficient of thermal expansion for volume correction",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:PER-DEG_C",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/PipeDiameter",
+      "@type": "sm:Property",
+      "rdfs:label": "Pipe Diameter",
+      "rdfs:comment": "Internal diameter of meter tube",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:MilliM",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/PressureSensor_Source",
+      "@type": "sm:Property",
+      "rdfs:label": "Pressure Sensor Source",
+      "rdfs:comment": "Type or model of pressure sensor",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/PressureSensor_SerialNumber",
+      "@type": "sm:Property",
+      "rdfs:label": "Pressure Sensor Serial Number",
+      "rdfs:comment": "Serial number of pressure sensor",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/PressureSensor_MinRange",
+      "@type": "sm:Property",
+      "rdfs:label": "Pressure Sensor Min Range",
+      "rdfs:comment": "Minimum measurable pressure",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:KiloPA",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/PressureSensor_MaxRange",
+      "@type": "sm:Property",
+      "rdfs:label": "Pressure Sensor Max Range",
+      "rdfs:comment": "Maximum measurable pressure",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:KiloPA",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/TempSensor_Source",
+      "@type": "sm:Property",
+      "rdfs:label": "Temperature Sensor Source",
+      "rdfs:comment": "Type or model of temperature sensor",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/TempSensor_SerialNumber",
+      "@type": "sm:Property",
+      "rdfs:label": "Temperature Sensor Serial Number",
+      "rdfs:comment": "Serial number of temperature sensor",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/TempSensor_MinRange",
+      "@type": "sm:Property",
+      "rdfs:label": "Temperature Sensor Min Range",
+      "rdfs:comment": "Minimum measurable temperature",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:DEG_C",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/TempSensor_MaxRange",
+      "@type": "sm:Property",
+      "rdfs:label": "Temperature Sensor Max Range",
+      "rdfs:comment": "Maximum measurable temperature",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:DEG_C",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/DensitySensor_Source",
+      "@type": "sm:Property",
+      "rdfs:label": "Density Sensor Source",
+      "rdfs:comment": "Type or model of density sensor (if equipped)",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/DensitySensor_SerialNumber",
+      "@type": "sm:Property",
+      "rdfs:label": "Density Sensor Serial Number",
+      "rdfs:comment": "Serial number of density sensor",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/FlowRate_Volumetric",
+      "@type": "sm:Property",
+      "rdfs:label": "Volumetric Flow Rate",
+      "rdfs:comment": "Current volumetric flow rate at flowing conditions",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:M3-PER-HR",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/FlowRate_Mass",
+      "@type": "sm:Property",
+      "rdfs:label": "Mass Flow Rate",
+      "rdfs:comment": "Current mass flow rate",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:KiloGM-PER-HR",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Pressure",
+      "@type": "sm:Property",
+      "rdfs:label": "Line Pressure",
+      "rdfs:comment": "Measured line pressure",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:KiloPA",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Temperature",
+      "@type": "sm:Property",
+      "rdfs:label": "Flowing Temperature",
+      "rdfs:comment": "Measured liquid temperature",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:DEG_C",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/AccumulatedVolume_Gross",
+      "@type": "sm:Property",
+      "rdfs:label": "Accumulated Gross Volume",
+      "rdfs:comment": "Total accumulated volume at flowing conditions",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:M3",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/AccumulatedVolume_Net",
+      "@type": "sm:Property",
+      "rdfs:label": "Accumulated Net Volume",
+      "rdfs:comment": "Total accumulated volume corrected to reference conditions",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:M3",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/AccumulatedMass",
+      "@type": "sm:Property",
+      "rdfs:label": "Accumulated Mass",
+      "rdfs:comment": "Total accumulated mass",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:KiloGM",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/CTL",
+      "@type": "sm:Property",
+      "rdfs:label": "CTL Factor",
+      "rdfs:comment": "Correction for effect of temperature on liquid (CTL)",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/CPL",
+      "@type": "sm:Property",
+      "rdfs:label": "CPL Factor",
+      "rdfs:comment": "Correction for effect of pressure on liquid (CPL)",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Status",
+      "@type": "sm:Property",
+      "rdfs:label": "Meter Status",
+      "rdfs:comment": "Overall meter operational status",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["Normal", "Alarm", "Fault", "Offline", "Maintenance"]
+    }
+  ],
+  "sm:alarms": [
+    {
+      "@id": "jpi:LiquidMeter/Alarm/HighFlowRate",
+      "@type": "sm:Alarm",
+      "rdfs:label": "High Flow Rate",
+      "rdfs:comment": "Flow rate exceeds configured high limit"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Alarm/LowFlowRate",
+      "@type": "sm:Alarm",
+      "rdfs:label": "Low Flow Rate",
+      "rdfs:comment": "Flow rate below configured low limit"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Alarm/NoFlow",
+      "@type": "sm:Alarm",
+      "rdfs:label": "No Flow",
+      "rdfs:comment": "Zero flow detected"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Alarm/HighPressure",
+      "@type": "sm:Alarm",
+      "rdfs:label": "High Pressure",
+      "rdfs:comment": "Line pressure exceeds high limit"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Alarm/LowPressure",
+      "@type": "sm:Alarm",
+      "rdfs:label": "Low Pressure",
+      "rdfs:comment": "Line pressure below low limit"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Alarm/HighTemperature",
+      "@type": "sm:Alarm",
+      "rdfs:label": "High Temperature",
+      "rdfs:comment": "Temperature exceeds high limit"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Alarm/LowTemperature",
+      "@type": "sm:Alarm",
+      "rdfs:label": "Low Temperature",
+      "rdfs:comment": "Temperature below low limit"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Alarm/HighWaterCut",
+      "@type": "sm:Alarm",
+      "rdfs:label": "High Water Cut",
+      "rdfs:comment": "Water content exceeds acceptable threshold"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Alarm/MeterFactorOutOfRange",
+      "@type": "sm:Alarm",
+      "rdfs:label": "Meter Factor Out of Range",
+      "rdfs:comment": "Meter factor deviation indicates potential calibration issue"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Alarm/CommsFault",
+      "@type": "sm:Alarm",
+      "rdfs:label": "Communications Fault",
+      "rdfs:comment": "Loss of communication with meter"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Alarm/SensorFault",
+      "@type": "sm:Alarm",
+      "rdfs:label": "Sensor Fault",
+      "rdfs:comment": "One or more sensor faults detected"
+    },
+    {
+      "@id": "jpi:LiquidMeter/Alarm/CalibrationDue",
+      "@type": "sm:Alarm",
+      "rdfs:label": "Calibration Due",
+      "rdfs:comment": "Meter calibration interval has expired"
+    }
+  ]
+}
