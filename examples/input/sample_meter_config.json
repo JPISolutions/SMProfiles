@@ -1,0 +1,80 @@
+{
+	"configuration": {
+		"name": "WELL-042-SALES-METER",
+		"owner": "Delek Bakken Operations",
+		"latitude": 48.2891,
+		"longitude": -103.4567,
+		"elevation": 625.3,
+		"baseTemperature": 15,
+		"basePressure": 101.325,
+		"atmosphericPressure": 101.325,
+		"units": "metric",
+		"contractHour": 8,
+		"AGA3":  {
+			"calculation": "AGA3_2013",
+			"orificeTap": "Flange",
+			"orificeDiameter": 26.1,
+			"orificeMaterial": "Type_316_Stainless_Steel",
+			"orificeReferenceTemperature": 20,
+			"pipeInsideDiameter": 76.1,
+			"pipeMaterial": "Carbon_Steel",
+			"pipeReferenceTemperature": 20,
+			"isentropicExponent": 1.3,
+			"viscosity": 0.010268,
+			"flowExtentsion": "Method_1"
+		},
+		"AGA8": {
+				"units": "molar_fraction",
+				"components": [
+					{ "component": "H2", "value": 0.0},
+					{ "component": "He", "value": 0.0},
+					{ "component": "CO2", "value": 0.0142},
+					{ "component": "H2S", "value": 0.0},
+					{ "component": "C1", "value": 0.8956},
+					{ "component": "C2", "value": 0.0621},
+					{ "component": "C3", "value": 0.0184},
+					{ "component": "iC4", "value": 0.0031},
+					{ "component": "nC4", "value": 0.0042},
+					{ "component": "iC5", "value": 0.0008},
+					{ "component": "nC5", "value": 0.0006},
+					{ "component": "C6", "value": 0.0003},
+					{ "component": "C7", "value": 0.0001},
+					{ "component": "C8", "value": 0.0},
+					{ "component": "C9", "value": 0.0},
+					{ "component": "C10", "value": 0.0},
+					{ "component": "N2", "value": 0.0006},
+					{ "component": "H2O", "value": 0.0},
+					{ "component": "CO", "value": 0.0},
+					{ "component": "O2", "value": 0.0},
+					{ "component": "Ar", "value": 0.0}
+				],
+				"density": 50.0,
+				"compressibility": 0.9842
+		},
+		"sensors": {
+			"differentialPressure": {
+				"source": "Rosemount 3051S",
+				"serialNumber": "DP-2024-A142",
+				"minimumRange": 0.0,
+				"maximumRange": 100.0,
+				"units": "kPa"
+			},
+			"staticPressure": {
+				"source": "Rosemount 3051S",
+				"serialNumber": "SP-2024-A143",
+				"minimumRange": 0.0,
+				"maximumRange": 10000.0,
+				"units": "kPa",
+				"tapLocation": "upstream",
+				"sensorType": "gauge"
+			},
+			"flowingTemperature": {
+				"source": "Rosemount 3144P RTD",
+				"serialNumber": "TEMP-2024-A144",
+				"minimumRange": -40.0,
+				"maximumRange": 100.0,
+				"units": "Celsius"
+			}
+		}
+	}
+}

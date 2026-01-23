@@ -1,0 +1,679 @@
+{
+  "@context": {
+    "sm": "http://cesmii.org/sm/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "unit": "http://qudt.org/vocab/unit/",
+    "qudt": "http://qudt.org/schema/qudt/"
+  },
+  "@id": "sm:OrificeGasMeter",
+  "@type": "sm:EquipmentType",
+  "rdfs:label": "Orifice Gas Meter",
+  "rdfs:comment": "Generic orifice gas flow meter for natural gas measurement following AGA-3 and AGA-8 standards. Applicable to FloBoss, TotalFlow, SCADA pack, and other flow computer implementations.",
+  "sm:version": "0.2.0",
+  "sm:manufacturer": "Multiple",
+  "sm:properties": [
+    {
+      "@id": "sm:OrificeGasMeter/Name",
+      "@type": "sm:Property",
+      "rdfs:label": "Meter Name",
+      "rdfs:comment": "Identifier for the meter",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/Owner",
+      "@type": "sm:Property",
+      "rdfs:label": "Owner",
+      "rdfs:comment": "Owner or operator of the meter",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/Latitude",
+      "@type": "sm:Property",
+      "rdfs:label": "Latitude",
+      "rdfs:comment": "Geographic latitude",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:DEG",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/Longitude",
+      "@type": "sm:Property",
+      "rdfs:label": "Longitude",
+      "rdfs:comment": "Geographic longitude",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:DEG",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/Elevation",
+      "@type": "sm:Property",
+      "rdfs:label": "Elevation",
+      "rdfs:comment": "Elevation above sea level",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:M",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/BaseTemperature",
+      "@type": "sm:Property",
+      "rdfs:label": "Base Temperature",
+      "rdfs:comment": "Reference temperature for volume correction",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:DEG_C",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/BasePressure",
+      "@type": "sm:Property",
+      "rdfs:label": "Base Pressure",
+      "rdfs:comment": "Reference pressure for volume correction",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:KiloPA",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/AtmosphericPressure",
+      "@type": "sm:Property",
+      "rdfs:label": "Atmospheric Pressure",
+      "rdfs:comment": "Local atmospheric pressure",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:KiloPA",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/Units",
+      "@type": "sm:Property",
+      "rdfs:label": "Unit System",
+      "rdfs:comment": "Measurement unit system",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["metric", "imperial"]
+    },
+    {
+      "@id": "sm:OrificeGasMeter/ContractHour",
+      "@type": "sm:Property",
+      "rdfs:label": "Contract Hour",
+      "rdfs:comment": "Hour of day when daily volumes roll over (0-23)",
+      "sm:dataType": "xsd:integer",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/AGA3_Calculation",
+      "@type": "sm:Property",
+      "rdfs:label": "AGA-3 Calculation Method",
+      "rdfs:comment": "AGA-3 calculation standard version",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["AGA3_1985", "AGA3_1992", "AGA3_2013"]
+    },
+    {
+      "@id": "sm:OrificeGasMeter/OrificeTapType",
+      "@type": "sm:Property",
+      "rdfs:label": "Orifice Tap Type",
+      "rdfs:comment": "Pressure tap configuration",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["Flange", "Pipe", "Corner"]
+    },
+    {
+      "@id": "sm:OrificeGasMeter/OrificeDiameter",
+      "@type": "sm:Property",
+      "rdfs:label": "Orifice Diameter",
+      "rdfs:comment": "Physical diameter of orifice plate opening",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:MilliM",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/OrificeMaterial",
+      "@type": "sm:Property",
+      "rdfs:label": "Orifice Material",
+      "rdfs:comment": "Material of orifice plate",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["Type_304_Stainless_Steel", "Type_316_Stainless_Steel", "Monel", "Carbon_Steel"]
+    },
+    {
+      "@id": "sm:OrificeGasMeter/OrificeReferenceTemperature",
+      "@type": "sm:Property",
+      "rdfs:label": "Orifice Reference Temperature",
+      "rdfs:comment": "Temperature at which orifice diameter was measured",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:DEG_C",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/PipeInsideDiameter",
+      "@type": "sm:Property",
+      "rdfs:label": "Pipe Inside Diameter",
+      "rdfs:comment": "Internal diameter of meter tube",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:MilliM",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/PipeMaterial",
+      "@type": "sm:Property",
+      "rdfs:label": "Pipe Material",
+      "rdfs:comment": "Material of meter tube",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["Carbon_Steel", "Stainless_Steel_304", "Stainless_Steel_316"]
+    },
+    {
+      "@id": "sm:OrificeGasMeter/PipeReferenceTemperature",
+      "@type": "sm:Property",
+      "rdfs:label": "Pipe Reference Temperature",
+      "rdfs:comment": "Temperature at which pipe diameter was measured",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:DEG_C",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/IsentropicExponent",
+      "@type": "sm:Property",
+      "rdfs:label": "Isentropic Exponent",
+      "rdfs:comment": "Gas specific heat ratio (k-value)",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/Viscosity",
+      "@type": "sm:Property",
+      "rdfs:label": "Gas Viscosity",
+      "rdfs:comment": "Dynamic viscosity of gas",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:CentiPOISE",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/FlowExtension",
+      "@type": "sm:Property",
+      "rdfs:label": "Flow Extension Method",
+      "rdfs:comment": "Method for extending flow calculations beyond normal ranges",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["Method_1", "Method_2"]
+    },
+    {
+      "@id": "sm:OrificeGasMeter/AGA8_Units",
+      "@type": "sm:Property",
+      "rdfs:label": "Gas Composition Units",
+      "rdfs:comment": "Units for gas composition values",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["molar_fraction", "mole_percent"]
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_H2",
+      "@type": "sm:Property",
+      "rdfs:label": "Hydrogen (H2)",
+      "rdfs:comment": "Molar fraction of hydrogen",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_He",
+      "@type": "sm:Property",
+      "rdfs:label": "Helium (He)",
+      "rdfs:comment": "Molar fraction of helium",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_CO2",
+      "@type": "sm:Property",
+      "rdfs:label": "Carbon Dioxide (CO2)",
+      "rdfs:comment": "Molar fraction of carbon dioxide",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_H2S",
+      "@type": "sm:Property",
+      "rdfs:label": "Hydrogen Sulfide (H2S)",
+      "rdfs:comment": "Molar fraction of hydrogen sulfide",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_C1",
+      "@type": "sm:Property",
+      "rdfs:label": "Methane (C1)",
+      "rdfs:comment": "Molar fraction of methane",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_C2",
+      "@type": "sm:Property",
+      "rdfs:label": "Ethane (C2)",
+      "rdfs:comment": "Molar fraction of ethane",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_C3",
+      "@type": "sm:Property",
+      "rdfs:label": "Propane (C3)",
+      "rdfs:comment": "Molar fraction of propane",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_iC4",
+      "@type": "sm:Property",
+      "rdfs:label": "Iso-Butane (iC4)",
+      "rdfs:comment": "Molar fraction of iso-butane",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_nC4",
+      "@type": "sm:Property",
+      "rdfs:label": "N-Butane (nC4)",
+      "rdfs:comment": "Molar fraction of n-butane",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_iC5",
+      "@type": "sm:Property",
+      "rdfs:label": "Iso-Pentane (iC5)",
+      "rdfs:comment": "Molar fraction of iso-pentane",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_nC5",
+      "@type": "sm:Property",
+      "rdfs:label": "N-Pentane (nC5)",
+      "rdfs:comment": "Molar fraction of n-pentane",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_C6",
+      "@type": "sm:Property",
+      "rdfs:label": "Hexane (C6)",
+      "rdfs:comment": "Molar fraction of hexane",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_C7",
+      "@type": "sm:Property",
+      "rdfs:label": "Heptane (C7)",
+      "rdfs:comment": "Molar fraction of heptane",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_C8",
+      "@type": "sm:Property",
+      "rdfs:label": "Octane (C8)",
+      "rdfs:comment": "Molar fraction of octane",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_C9",
+      "@type": "sm:Property",
+      "rdfs:label": "Nonane (C9)",
+      "rdfs:comment": "Molar fraction of nonane",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_C10",
+      "@type": "sm:Property",
+      "rdfs:label": "Decane (C10)",
+      "rdfs:comment": "Molar fraction of decane",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_N2",
+      "@type": "sm:Property",
+      "rdfs:label": "Nitrogen (N2)",
+      "rdfs:comment": "Molar fraction of nitrogen",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_H2O",
+      "@type": "sm:Property",
+      "rdfs:label": "Water (H2O)",
+      "rdfs:comment": "Molar fraction of water vapor",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_CO",
+      "@type": "sm:Property",
+      "rdfs:label": "Carbon Monoxide (CO)",
+      "rdfs:comment": "Molar fraction of carbon monoxide",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_O2",
+      "@type": "sm:Property",
+      "rdfs:label": "Oxygen (O2)",
+      "rdfs:comment": "Molar fraction of oxygen",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasComp_Ar",
+      "@type": "sm:Property",
+      "rdfs:label": "Argon (Ar)",
+      "rdfs:comment": "Molar fraction of argon",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/GasDensity",
+      "@type": "sm:Property",
+      "rdfs:label": "Gas Density",
+      "rdfs:comment": "Gas density at flowing conditions",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:KiloGM-PER-M3",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/Compressibility",
+      "@type": "sm:Property",
+      "rdfs:label": "Compressibility Factor",
+      "rdfs:comment": "Gas compressibility factor (Z-factor)",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/DPSensor_Source",
+      "@type": "sm:Property",
+      "rdfs:label": "DP Sensor Source",
+      "rdfs:comment": "Type or model of differential pressure sensor",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/DPSensor_SerialNumber",
+      "@type": "sm:Property",
+      "rdfs:label": "DP Sensor Serial Number",
+      "rdfs:comment": "Serial number of DP sensor",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/DPSensor_MinRange",
+      "@type": "sm:Property",
+      "rdfs:label": "DP Sensor Min Range",
+      "rdfs:comment": "Minimum measurable differential pressure",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:KiloPA",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/DPSensor_MaxRange",
+      "@type": "sm:Property",
+      "rdfs:label": "DP Sensor Max Range",
+      "rdfs:comment": "Maximum measurable differential pressure",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:KiloPA",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/StaticPressureSensor_Source",
+      "@type": "sm:Property",
+      "rdfs:label": "Static Pressure Sensor Source",
+      "rdfs:comment": "Type or model of static pressure sensor",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/StaticPressureSensor_SerialNumber",
+      "@type": "sm:Property",
+      "rdfs:label": "Static Pressure Sensor Serial Number",
+      "rdfs:comment": "Serial number of static pressure sensor",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/StaticPressureSensor_MinRange",
+      "@type": "sm:Property",
+      "rdfs:label": "Static Pressure Sensor Min Range",
+      "rdfs:comment": "Minimum measurable static pressure",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:KiloPA",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/StaticPressureSensor_MaxRange",
+      "@type": "sm:Property",
+      "rdfs:label": "Static Pressure Sensor Max Range",
+      "rdfs:comment": "Maximum measurable static pressure",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:KiloPA",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/StaticPressureSensor_TapLocation",
+      "@type": "sm:Property",
+      "rdfs:label": "Static Pressure Tap Location",
+      "rdfs:comment": "Location of static pressure tap relative to orifice",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["upstream", "downstream"]
+    },
+    {
+      "@id": "sm:OrificeGasMeter/StaticPressureSensor_Type",
+      "@type": "sm:Property",
+      "rdfs:label": "Static Pressure Sensor Type",
+      "rdfs:comment": "Type of pressure measurement",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["gauge", "absolute"]
+    },
+    {
+      "@id": "sm:OrificeGasMeter/TempSensor_Source",
+      "@type": "sm:Property",
+      "rdfs:label": "Temperature Sensor Source",
+      "rdfs:comment": "Type or model of temperature sensor",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/TempSensor_SerialNumber",
+      "@type": "sm:Property",
+      "rdfs:label": "Temperature Sensor Serial Number",
+      "rdfs:comment": "Serial number of temperature sensor",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/TempSensor_MinRange",
+      "@type": "sm:Property",
+      "rdfs:label": "Temperature Sensor Min Range",
+      "rdfs:comment": "Minimum measurable temperature",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:DEG_C",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/TempSensor_MaxRange",
+      "@type": "sm:Property",
+      "rdfs:label": "Temperature Sensor Max Range",
+      "rdfs:comment": "Maximum measurable temperature",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:DEG_C",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/FlowRate",
+      "@type": "sm:Property",
+      "rdfs:label": "Flow Rate",
+      "rdfs:comment": "Current volumetric flow rate",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:M3-PER-HR",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/DifferentialPressure",
+      "@type": "sm:Property",
+      "rdfs:label": "Differential Pressure",
+      "rdfs:comment": "Measured pressure drop across orifice plate",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:KiloPA",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/StaticPressure",
+      "@type": "sm:Property",
+      "rdfs:label": "Static Pressure",
+      "rdfs:comment": "Measured line pressure",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:KiloPA",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/Temperature",
+      "@type": "sm:Property",
+      "rdfs:label": "Flowing Temperature",
+      "rdfs:comment": "Measured gas temperature",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:DEG_C",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/SpecificGravity",
+      "@type": "sm:Property",
+      "rdfs:label": "Specific Gravity",
+      "rdfs:comment": "Gas specific gravity (relative to air)",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:UNITLESS",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/EnergyFlowRate",
+      "@type": "sm:Property",
+      "rdfs:label": "Energy Flow Rate",
+      "rdfs:comment": "Current energy flow rate",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:GJ-PER-HR",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/AccumulatedVolume",
+      "@type": "sm:Property",
+      "rdfs:label": "Accumulated Volume",
+      "rdfs:comment": "Total accumulated gas volume",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:M3",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/AccumulatedEnergy",
+      "@type": "sm:Property",
+      "rdfs:label": "Accumulated Energy",
+      "rdfs:comment": "Total accumulated energy",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:GigaJ",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/HeatingValue",
+      "@type": "sm:Property",
+      "rdfs:label": "Heating Value",
+      "rdfs:comment": "Gas heating value (HHV or LHV)",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:MegaJ-PER-M3",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/Status",
+      "@type": "sm:Property",
+      "rdfs:label": "Meter Status",
+      "rdfs:comment": "Overall meter operational status",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read",
+      "sm:enumeration": ["Normal", "Alarm", "Fault", "Offline"]
+    }
+  ],
+  "sm:alarms": [
+    {
+      "@id": "sm:OrificeGasMeter/Alarm/HighDP",
+      "@type": "sm:Alarm",
+      "rdfs:label": "High Differential Pressure",
+      "rdfs:comment": "DP exceeds configured high limit"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/Alarm/LowDP",
+      "@type": "sm:Alarm",
+      "rdfs:label": "Low Differential Pressure",
+      "rdfs:comment": "DP below configured low limit"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/Alarm/HighStaticPressure",
+      "@type": "sm:Alarm",
+      "rdfs:label": "High Static Pressure",
+      "rdfs:comment": "Static pressure exceeds high limit"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/Alarm/LowStaticPressure",
+      "@type": "sm:Alarm",
+      "rdfs:label": "Low Static Pressure",
+      "rdfs:comment": "Static pressure below low limit"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/Alarm/HighTemperature",
+      "@type": "sm:Alarm",
+      "rdfs:label": "High Temperature",
+      "rdfs:comment": "Temperature exceeds high limit"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/Alarm/LowTemperature",
+      "@type": "sm:Alarm",
+      "rdfs:label": "Low Temperature",
+      "rdfs:comment": "Temperature below low limit"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/Alarm/CommsFault",
+      "@type": "sm:Alarm",
+      "rdfs:label": "Communications Fault",
+      "rdfs:comment": "Loss of communication with meter"
+    },
+    {
+      "@id": "sm:OrificeGasMeter/Alarm/SensorOutOfRange",
+      "@type": "sm:Alarm",
+      "rdfs:label": "Sensor Out of Range",
+      "rdfs:comment": "One or more sensor readings outside calibrated range"
+    }
+  ]
+}

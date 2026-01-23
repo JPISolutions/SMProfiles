@@ -1,0 +1,282 @@
+{
+  "@context": {
+    "sm": "http://cesmii.org/sm/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "unit": "http://qudt.org/vocab/unit/"
+  },
+  "@id": "sm:OrificeGasMeter/Instance/WELL-001-METER",
+  "@type": "sm:OrificeGasMeter",
+  "rdfs:label": "Well 001 Sales Meter",
+  "sm:propertyValues": {
+    "Name": {
+      "value": "WELL-001-SALES"
+    },
+    "Owner": {
+      "value": "Delek Bakken"
+    },
+    "Latitude": {
+      "value": 48.2345,
+      "unit": "unit:DEG"
+    },
+    "Longitude": {
+      "value": -103.5678,
+      "unit": "unit:DEG"
+    },
+    "Elevation": {
+      "value": 610.5,
+      "unit": "unit:M"
+    },
+    "BaseTemperature": {
+      "value": 15.0,
+      "unit": "unit:DEG_C"
+    },
+    "BasePressure": {
+      "value": 101.325,
+      "unit": "unit:KiloPA"
+    },
+    "AtmosphericPressure": {
+      "value": 101.325,
+      "unit": "unit:KiloPA"
+    },
+    "Units": {
+      "value": "metric"
+    },
+    "ContractHour": {
+      "value": 8
+    },
+    "AGA3_Calculation": {
+      "value": "AGA3_2013"
+    },
+    "OrificeTapType": {
+      "value": "Flange"
+    },
+    "OrificeDiameter": {
+      "value": 26.1,
+      "unit": "unit:MilliM"
+    },
+    "OrificeMaterial": {
+      "value": "Type_316_Stainless_Steel"
+    },
+    "OrificeReferenceTemperature": {
+      "value": 20.0,
+      "unit": "unit:DEG_C"
+    },
+    "PipeInsideDiameter": {
+      "value": 76.1,
+      "unit": "unit:MilliM"
+    },
+    "PipeMaterial": {
+      "value": "Carbon_Steel"
+    },
+    "PipeReferenceTemperature": {
+      "value": 20.0,
+      "unit": "unit:DEG_C"
+    },
+    "IsentropicExponent": {
+      "value": 1.3,
+      "unit": "unit:UNITLESS"
+    },
+    "Viscosity": {
+      "value": 0.010268,
+      "unit": "unit:CentiPOISE"
+    },
+    "FlowExtension": {
+      "value": "Method_1"
+    },
+    "AGA8_Units": {
+      "value": "molar_fraction"
+    },
+    "GasComp_H2": {
+      "value": 0.0,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_He": {
+      "value": 0.0,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_CO2": {
+      "value": 0.0142,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_H2S": {
+      "value": 0.0,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_C1": {
+      "value": 0.8956,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_C2": {
+      "value": 0.0621,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_C3": {
+      "value": 0.0184,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_iC4": {
+      "value": 0.0031,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_nC4": {
+      "value": 0.0042,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_iC5": {
+      "value": 0.0008,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_nC5": {
+      "value": 0.0006,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_C6": {
+      "value": 0.0003,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_C7": {
+      "value": 0.0001,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_C8": {
+      "value": 0.0,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_C9": {
+      "value": 0.0,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_C10": {
+      "value": 0.0,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_N2": {
+      "value": 0.0006,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_H2O": {
+      "value": 0.0,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_CO": {
+      "value": 0.0,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_O2": {
+      "value": 0.0,
+      "unit": "unit:UNITLESS"
+    },
+    "GasComp_Ar": {
+      "value": 0.0,
+      "unit": "unit:UNITLESS"
+    },
+    "GasDensity": {
+      "value": 50.0,
+      "unit": "unit:KiloGM-PER-M3",
+      "timestamp": "2025-01-23T10:30:00Z"
+    },
+    "Compressibility": {
+      "value": 0.9842,
+      "unit": "unit:UNITLESS",
+      "timestamp": "2025-01-23T10:30:00Z"
+    },
+    "DPSensor_Source": {
+      "value": "Rosemount 3051S"
+    },
+    "DPSensor_SerialNumber": {
+      "value": "SN-DP-2024-142"
+    },
+    "DPSensor_MinRange": {
+      "value": 0.0,
+      "unit": "unit:KiloPA"
+    },
+    "DPSensor_MaxRange": {
+      "value": 100.0,
+      "unit": "unit:KiloPA"
+    },
+    "StaticPressureSensor_Source": {
+      "value": "Rosemount 3051S"
+    },
+    "StaticPressureSensor_SerialNumber": {
+      "value": "SN-SP-2024-143"
+    },
+    "StaticPressureSensor_MinRange": {
+      "value": 0.0,
+      "unit": "unit:KiloPA"
+    },
+    "StaticPressureSensor_MaxRange": {
+      "value": 10000.0,
+      "unit": "unit:KiloPA"
+    },
+    "StaticPressureSensor_TapLocation": {
+      "value": "upstream"
+    },
+    "StaticPressureSensor_Type": {
+      "value": "gauge"
+    },
+    "TempSensor_Source": {
+      "value": "Rosemount 3144P"
+    },
+    "TempSensor_SerialNumber": {
+      "value": "SN-TEMP-2024-144"
+    },
+    "TempSensor_MinRange": {
+      "value": -40.0,
+      "unit": "unit:DEG_C"
+    },
+    "TempSensor_MaxRange": {
+      "value": 100.0,
+      "unit": "unit:DEG_C"
+    },
+    "FlowRate": {
+      "value": 245.6,
+      "unit": "unit:M3-PER-HR",
+      "timestamp": "2025-01-23T10:30:00Z"
+    },
+    "DifferentialPressure": {
+      "value": 12.4,
+      "unit": "unit:KiloPA",
+      "timestamp": "2025-01-23T10:30:00Z"
+    },
+    "StaticPressure": {
+      "value": 3450.2,
+      "unit": "unit:KiloPA",
+      "timestamp": "2025-01-23T10:30:00Z"
+    },
+    "Temperature": {
+      "value": 18.5,
+      "unit": "unit:DEG_C",
+      "timestamp": "2025-01-23T10:30:00Z"
+    },
+    "SpecificGravity": {
+      "value": 0.65,
+      "unit": "unit:UNITLESS",
+      "timestamp": "2025-01-23T10:30:00Z"
+    },
+    "EnergyFlowRate": {
+      "value": 9.84,
+      "unit": "unit:GJ-PER-HR",
+      "timestamp": "2025-01-23T10:30:00Z"
+    },
+    "AccumulatedVolume": {
+      "value": 1247850.3,
+      "unit": "unit:M3",
+      "timestamp": "2025-01-23T10:30:00Z"
+    },
+    "AccumulatedEnergy": {
+      "value": 49914.2,
+      "unit": "unit:GigaJ",
+      "timestamp": "2025-01-23T10:30:00Z"
+    },
+    "HeatingValue": {
+      "value": 40.05,
+      "unit": "unit:MegaJ-PER-M3",
+      "timestamp": "2025-01-23T10:30:00Z"
+    },
+    "Status": {
+      "value": "Normal",
+      "timestamp": "2025-01-23T10:30:00Z"
+    }
+  }
+}
