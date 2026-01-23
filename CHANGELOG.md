@@ -8,6 +8,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- LiquidMeter profile (v0.1.0) with 53 properties for turbine, PD, Coriolis, ultrasonic, and magnetic meters
+  - Support for crude oil, condensate, water, NGLs, refined products, and mixed liquids
+  - Volume correction standards: API MPMS 11.1, API 2540, ISO 91-1
+  - Fluid properties: API gravity, density, viscosity, water cut, BS&W, salt/sulfur content
+  - Both volumetric and mass flow measurement
+  - 12 standard alarms for comprehensive monitoring
+
+### Changed
+- Updated repository title from "Gas Flow Computer" to "Flow Metering" to reflect both gas and liquid support
+- Enhanced mixed meter type examples to show both gas and liquid meters on same device
+
+## [0.1.0] - 2025-01-23
+
+### Added
 - FlowComputer profile (v0.1.0) with 28 device properties
 - MeterRun profile (v0.1.0) with 8 run properties  
 - OrificeGasMeter profile (v0.2.0) with 69 properties including full AGA-3/AGA-8 support

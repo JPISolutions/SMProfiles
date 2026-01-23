@@ -1,12 +1,20 @@
-# Extending the Gas Meter Profile
+# Extending Flow Meter Profiles
 
 ## Adding New Meter Types
 
-The current profile covers orifice meters generically (FloBoss, TotalFlow, SCADA packs), but can be extended for:
-- Turbine meters
-- Ultrasonic meters  
-- Coriolis meters
+The current profiles cover orifice gas meters and general liquid meters. Additional specialized profiles can be added for:
+
+**Gas Meters:**
+- Ultrasonic gas meters
+- Coriolis gas meters
 - Rotary meters
+- Vortex meters
+
+**Liquid Meters:**
+- Specialized turbine meters (with advanced diagnostics)
+- Ultrasonic liquid meters (multi-path)
+- Specialized PD meters
+- Specialized Coriolis meters (with extended properties)
 
 ### Using the Generator
 

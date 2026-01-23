@@ -1,8 +1,8 @@
-# Gas Flow Computer SM Profiles
+# Flow Metering SM Profiles
 
-**CESMII Smart Manufacturing profiles for gas flow measurement systems following AGA-3 and AGA-8 standards.**
+**CESMII Smart Manufacturing profiles for gas and liquid flow measurement systems.**
 
-Designed for JSON data exchange via MQTT, REST APIs, and other IoT protocols. Perfect for oil & gas SCADA systems, particularly those using Ignition with FloBoss, TotalFlow, or custom flow computers.
+Supports gas metering (AGA-3 and AGA-8 standards) and liquid metering (crude oil, condensate, water, NGLs). Designed for JSON data exchange via MQTT, REST APIs, and other IoT protocols. Perfect for oil & gas SCADA systems, particularly those using Ignition with FloBoss, TotalFlow, or custom flow computers.
 
 📖 **[Setup Instructions](SETUP.md)** | 🤝 **[Contributing](CONTRIBUTING.md)** | 📚 **[Documentation](docs/)**
 
@@ -20,7 +20,9 @@ See [`docs/architecture.md`](docs/architecture.md) for complete details.
 
 ## Current Profiles
 
-### 1. FlowComputer (v0.1.0)
+### Device & Run Profiles
+
+#### 1. FlowComputer (v0.1.0)
 **Location**: `profiles/flow_computer.jsonld`
 
 Primary profile for flow computer devices (FloBoss ROC800/809, TotalFlow G4/G5, SCADA packs, etc.) with **28 properties**:
@@ -33,7 +35,7 @@ Primary profile for flow computer devices (FloBoss ROC800/809, TotalFlow G4/G5, 
 - **Status**: Device status, active alarm count, uptime
 - **8 Standard Alarms**: Comms fault, power failure, low battery, high CPU, memory full, clock error, config error, high temp
 
-### 2. MeterRun (v0.1.0)
+#### 2. MeterRun (v0.1.0)
 **Location**: `profiles/meter_run.jsonld`
 
 Profile for individual meter runs on a flow computer with **8 properties**:
@@ -43,7 +45,9 @@ Profile for individual meter runs on a flow computer with **8 properties**:
 - **Status**: Run operational status
 - **Relationship**: References meter-specific configuration (OrificeGasMeter, TurbineMeter, etc.)
 
-### 3. OrificeGasMeter (v0.2.0)
+### Meter Configuration Profiles
+
+#### 3. OrificeGasMeter (v0.2.0)
 **Location**: `profiles/orifice_gas_meter.jsonld`
 
 Vendor-neutral profile for orifice meter configuration and measurements with **69 properties**:
@@ -56,6 +60,22 @@ Vendor-neutral profile for orifice meter configuration and measurements with **6
 - **Runtime Measurements**: Flow, energy, pressures, temperature, accumulations, status
 - **8 Standard Alarms**: Hi/Lo pressure/temp, comms fault, sensor out of range
 
+#### 4. LiquidMeter (v0.1.0)
+**Location**: `profiles/liquid_meter.jsonld`
+
+Vendor-neutral profile for liquid meters (turbine, positive displacement, Coriolis, ultrasonic, magnetic) with **53 properties**:
+
+- **Equipment ID**: Name, owner, GPS coordinates, elevation
+- **Meter Type**: Turbine, PD, Coriolis, Ultrasonic, Magnetic
+- **Fluid Type**: Crude oil, condensate, water, NGLs, refined products, mixed liquids
+- **Base Conditions**: Base temp/pressure, contract hour, unit system
+- **Calibration**: Meter factor, K-factor, volume correction method (API MPMS 11.1, API 2540, ISO 91-1)
+- **Fluid Properties**: API gravity, density (reference & flowing), viscosity, water cut, BS&W, salt/sulfur content
+- **Volume Correction**: CTL/CPL factors, thermal expansion coefficient
+- **Sensor Specs**: Pressure, temperature, and density sensor metadata
+- **Runtime Measurements**: Volumetric/mass flow rates, gross/net volume accumulations, mass accumulation
+- **12 Standard Alarms**: Hi/Lo flow/pressure/temp, no flow, high water cut, meter factor out of range, sensor fault, comms fault, calibration due
+
 See [`docs/profile_overview.md`](docs/profile_overview.md) for complete property breakdown.
 
 ## Structure
@@ -65,7 +85,8 @@ SMProfiles/
 ├── profiles/          # SM Profile definitions (JSON-LD)
 │   ├── flow_computer.jsonld
 │   ├── meter_run.jsonld
-│   └── orifice_gas_meter.jsonld
+│   ├── orifice_gas_meter.jsonld
+│   └── liquid_meter.jsonld
 ├── tools/             # Python utilities
 │   ├── setup.bat
 │   ├── validate_profile.py
@@ -181,11 +202,12 @@ Full support for:
 
 ### Mixed Meter Types
 A single flow computer can have different meter types on different runs:
-- Run 1: Orifice (sales)
-- Run 2: Turbine (check)
-- Run 3: Orifice (flare)
+- Run 1: Orifice gas (sales)
+- Run 2: Turbine liquid (condensate)
+- Run 3: Coriolis liquid (water)
+- Run 4: Orifice gas (flare)
 
-Easy to extend with new meter type profiles (turbine, ultrasonic, coriolis).
+Supports both gas and liquid metering on the same device.
 
 ## Usage
 

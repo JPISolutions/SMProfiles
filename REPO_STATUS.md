@@ -2,10 +2,11 @@
 
 ## ✅ What's Complete
 
-### Core Profiles (3)
+### Core Profiles (4)
 - ✅ **FlowComputer** (28 properties) - Device profile
 - ✅ **MeterRun** (8 properties) - Run profile  
 - ✅ **OrificeGasMeter** (69 properties) - Meter config profile
+- ✅ **LiquidMeter** (53 properties) - Liquid meter config profile
 
 ### Documentation
 - ✅ **README.md** - Main documentation, public-ready
@@ -45,6 +46,7 @@ Files to update:
 - `profiles/flow_computer.jsonld`
 - `profiles/meter_run.jsonld`
 - `profiles/orifice_gas_meter.jsonld`
+- `profiles/liquid_meter.jsonld`
 
 ### 2. Test Validation
 
@@ -55,9 +57,10 @@ venv\Scripts\activate.bat
 python validate_profile.py ../profiles/flow_computer.jsonld
 python validate_profile.py ../profiles/meter_run.jsonld
 python validate_profile.py ../profiles/orifice_gas_meter.jsonld
+python validate_profile.py ../profiles/liquid_meter.jsonld
 ```
 
-All three should pass validation.
+All four should pass validation.
 
 ## 🎯 Key Points for Your Use Case
 
@@ -66,6 +69,7 @@ All three should pass validation.
 - **Sparkplug B** ← Future option
 - **Vendor-neutral data model** 
 - **FloBoss/TotalFlow/Custom** flow computers
+- **Gas & liquid metering** (orifice, turbine, PD, Coriolis, etc.)
 - **Ignition SCADA integration**
 
 ### ❌ You DON'T Need:
@@ -86,7 +90,8 @@ SMProfiles/
 ├── profiles/                       # ← The actual SM Profile definitions
 │   ├── flow_computer.jsonld       # Device (28 props)
 │   ├── meter_run.jsonld           # Run (8 props)
-│   └── orifice_gas_meter.jsonld   # Meter config (69 props)
+│   ├── orifice_gas_meter.jsonld   # Gas meter config (69 props)
+│   └── liquid_meter.jsonld        # Liquid meter config (53 props)
 ├── tools/                          # ← Python utilities
 │   ├── validate_profile.py
 │   ├── generate_profile.py
@@ -132,7 +137,7 @@ SMProfiles/
 ## 📋 Checklist
 
 - [ ] Update GitHub org/repo name in namespace URIs (if different)
-- [ ] Validate all three profiles
+- [ ] Validate all four profiles
 - [ ] Test with sample MQTT payload
 - [ ] Review docs for any company-specific references
 - [ ] Add .gitignore entries if needed
