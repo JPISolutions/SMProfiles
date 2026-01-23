@@ -24,9 +24,10 @@ source venv/bin/activate     # Linux/Mac
 python validate_profile.py ../profiles/flow_computer.jsonld
 python validate_profile.py ../profiles/meter_run.jsonld
 python validate_profile.py ../profiles/orifice_gas_meter.jsonld
+python validate_profile.py ../profiles/liquid_meter.jsonld
 ```
 
-All three should pass validation with no errors.
+All four should pass validation with no errors.
 
 ### 3. Review Examples
 
@@ -39,7 +40,8 @@ SMProfiles/
 ├── profiles/               # Profile definitions
 │   ├── flow_computer.jsonld
 │   ├── meter_run.jsonld
-│   └── orifice_gas_meter.jsonld
+│   ├── orifice_gas_meter.jsonld
+│   └── liquid_meter.jsonld
 ├── tools/                  # Python utilities
 │   ├── validate_profile.py
 │   ├── generate_profile.py

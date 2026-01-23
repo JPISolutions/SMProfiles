@@ -28,6 +28,7 @@ Reference profiles directly in your JSON payloads:
 
 Structure your MQTT payloads following the profile schema:
 
+**Gas Metering Example:**
 ```json
 {
   "@type": "jpi:FlowComputer",
@@ -35,7 +36,7 @@ Structure your MQTT payloads following the profile schema:
   "Manufacturer": "Emerson",
   "Model": "ROC809",
   "SerialNumber": "ROC809-2024-A142",
-  "NumberOfRuns": 3,
+  "NumberOfRuns": 1,
   "hasRun": [
     {
       "@type": "jpi:MeterRun",
@@ -46,6 +47,31 @@ Structure your MQTT payloads following the profile schema:
         "@type": "jpi:OrificeGasMeter",
         "FlowRate": 245.6,
         "DifferentialPressure": 12.4,
+        ...
+      }
+    }
+  ]
+}
+```
+
+**Liquid Metering Example:**
+```json
+{
+  "@type": "jpi:FlowComputer",
+  "DeviceName": "BATTERY-12-FLOBOSS",
+  "NumberOfRuns": 1,
+  "hasRun": [
+    {
+      "@type": "jpi:MeterRun",
+      "RunNumber": 1,
+      "RunName": "CONDENSATE-METER",
+      "MeterType": "Turbine",
+      "hasMeterConfiguration": {
+        "@type": "jpi:LiquidMeter",
+        "MeterType": "Turbine",
+        "FluidType": "Condensate",
+        "FlowRate_Volumetric": 125.4,
+        "API_Gravity": 42.3,
         ...
       }
     }
@@ -144,6 +170,11 @@ If this repository becomes public, add it to your organization's profile registr
       "name": "OrificeGasMeter",
       "version": "0.2.0",
       "url": "https://github.com/JPISolutions/SMProfiles/profiles/orifice_gas_meter.jsonld"
+    },
+    {
+      "name": "LiquidMeter",
+      "version": "0.1.0",
+      "url": "https://github.com/JPISolutions/SMProfiles/profiles/liquid_meter.jsonld"
     }
   ]
 }

@@ -2,7 +2,7 @@
 
 ## Overview
 
-The SM Profile architecture is **device-centric**, modeling the flow computer as the primary equipment that contains multiple meter runs, each with meter-specific configurations.
+The SM Profile architecture is **device-centric**, modeling the flow computer as the primary equipment that contains multiple meter runs, each with meter-specific configurations. Supports both gas and liquid metering.
 
 ## Profile Hierarchy
 
@@ -14,9 +14,9 @@ FlowComputer
 └── MeterRun[] (collection)
     ├── Run Information (number, name, type, purpose)
     └── Meter Configuration (specific to meter type)
-        ├── OrificeGasMeter (for orifice runs)
-        ├── TurbineMeter (for turbine runs)
-        ├── UltrasonicMeter (for ultrasonic runs)
+        ├── OrificeGasMeter (for orifice gas runs)
+        ├── LiquidMeter (for turbine, PD, Coriolis, ultrasonic, magnetic runs)
+        ├── UltrasonicGasMeter (future - for ultrasonic gas runs)
         └── etc.
 ```
 
@@ -52,7 +52,10 @@ Represents a **single measurement point** on the flow computer. A ROC809 typical
 - Status
 
 ### 3. Meter Type Profiles
-**Location**: `profiles/orifice_gas_meter.jsonld` (and future turbine, ultrasonic, etc.)
+**Locations**: 
+- `profiles/orifice_gas_meter.jsonld` - Gas metering
+- `profiles/liquid_meter.jsonld` - Liquid metering
+- Future: ultrasonic gas, vortex, etc.
 
 Meter-specific **configuration and measurements** for each meter type. Different meter types have different properties.
 
@@ -60,7 +63,14 @@ Meter-specific **configuration and measurements** for each meter type. Different
 - AGA-3 configuration (plate diameter, pipe diameter, materials, tap types)
 - AGA-8 gas composition (21 components)
 - Sensor specifications (DP, static pressure, temperature)
-- Runtime measurements (flow, pressures, temperature, accumulations)
+- Runtime measurements (flow, energy, pressures, temperature, accumulations)
+
+**LiquidMeter**: 53 properties
+- Meter type (turbine, PD, Coriolis, ultrasonic, magnetic)
+- Fluid type (crude oil, condensate, water, NGLs, refined products)
+- Calibration (meter factor, K-factor, volume correction method)
+- Fluid properties (API gravity, density, viscosity, water cut, BS&W)
+- Runtime measurements (volumetric/mass flow, gross/net volumes, accumulations)
 
 ## JSON Payload Structure
 
@@ -132,16 +142,18 @@ Whether it's a FloBoss ROC809, TotalFlow G5, or custom SCADA pack:
 
 ### 3. Scalability
 Easy to add new meter types:
-- Create `TurbineMeter` profile
-- Create `UltrasonicMeter` profile
+- `OrificeGasMeter` profile (implemented)
+- `LiquidMeter` profile (implemented)
+- `UltrasonicGasMeter` profile (future)
+- `VortexMeter` profile (future)
 - MeterRun references them via `hasMeterConfiguration`
 
 ### 4. Mixed Meter Types
-A single flow computer can have:
-- Run 1: Orifice meter (sales)
-- Run 2: Turbine meter (check)
-- Run 3: Ultrasonic meter (allocation)
-- Run 4: Orifice meter (flare)
+A single flow computer can have both gas and liquid meters:
+- Run 1: Orifice gas meter (sales gas)
+- Run 2: Turbine liquid meter (condensate production)
+- Run 3: Coriolis liquid meter (water disposal)
+- Run 4: Orifice gas meter (flare gas)
 
 Each run's `MeterType` property indicates the configuration type.
 

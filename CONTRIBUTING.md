@@ -1,6 +1,6 @@
 # Contributing to SM Profiles
 
-Thank you for your interest in contributing to the Gas Flow Computer SM Profiles! This guide will help you get started.
+Thank you for your interest in contributing to the Flow Metering SM Profiles! This guide will help you get started.
 
 ## Getting Started
 
