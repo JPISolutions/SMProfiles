@@ -609,6 +609,42 @@
       "sm:accessMode": "read"
     },
     {
+      "@id": "jpi:OrificeGasMeter/CurrentDayVolume",
+      "@type": "sm:Property",
+      "rdfs:label": "Current Day Volume",
+      "rdfs:comment": "Accumulated volume since last contract hour rollover",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:M3",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:OrificeGasMeter/PreviousDayVolume",
+      "@type": "sm:Property",
+      "rdfs:label": "Previous Day Volume",
+      "rdfs:comment": "Total volume for the previous contract day",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:M3",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:OrificeGasMeter/CurrentHourVolume",
+      "@type": "sm:Property",
+      "rdfs:label": "Current Hour Volume",
+      "rdfs:comment": "Accumulated volume since the start of the current hour",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:M3",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:OrificeGasMeter/PreviousHourVolume",
+      "@type": "sm:Property",
+      "rdfs:label": "Previous Hour Volume",
+      "rdfs:comment": "Total volume for the previous hour",
+      "sm:dataType": "xsd:float",
+      "sm:unit": "unit:M3",
+      "sm:accessMode": "read"
+    },
+    {
       "@id": "jpi:OrificeGasMeter/HeatingValue",
       "@type": "sm:Property",
       "rdfs:label": "Heating Value",

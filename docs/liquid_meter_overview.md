@@ -50,7 +50,7 @@ Vendor-neutral CESMII SM Profile for liquid meters including turbine, positive d
 **Density Sensor (if equipped):**
 - Source, SerialNumber
 
-### Runtime Measurements (8 properties)
+### Runtime Measurements (12 properties)
 - **FlowRate_Volumetric**: Volumetric flow at flowing conditions (m³/hr)
 - **FlowRate_Mass**: Mass flow rate (kg/hr)
 - **Pressure**: Line pressure (kPa)
@@ -58,6 +58,10 @@ Vendor-neutral CESMII SM Profile for liquid meters including turbine, positive d
 - **AccumulatedVolume_Gross**: Total volume at flowing conditions (m³)
 - **AccumulatedVolume_Net**: Total volume corrected to reference conditions (m³)
 - **AccumulatedMass**: Total accumulated mass (kg)
+- **CurrentDayVolume**: Volume since last contract hour rollover (m³)
+- **PreviousDayVolume**: Total volume for previous contract day (m³)
+- **CurrentHourVolume**: Volume since start of current hour (m³)
+- **PreviousHourVolume**: Total volume for previous hour (m³)
 - **Status**: Normal/Alarm/Fault/Offline/Maintenance
 
 ### Alarms (12 types)
@@ -71,10 +75,10 @@ Vendor-neutral CESMII SM Profile for liquid meters including turbine, positive d
 - Sensor Fault
 - Calibration Due
 
-## Total Properties: 53
+## Total Properties: 57
 
-**Configuration (static)**: 35 properties  
-**Runtime (dynamic)**: 8 properties  
+**Configuration (static)**: 35 properties
+**Runtime (dynamic)**: 12 properties
 **Alarms**: 12 types
 
 ## Usage Notes

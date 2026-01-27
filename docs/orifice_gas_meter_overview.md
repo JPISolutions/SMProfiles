@@ -55,7 +55,7 @@ Vendor-neutral CESMII SM Profile for AGA-3/AGA-8 compliant orifice gas meters. W
 **Temperature Sensor:**
 - Source, SerialNumber, MinRange, MaxRange
 
-### Runtime Measurements (10 properties)
+### Runtime Measurements (14 properties)
 - **FlowRate**: Volumetric flow (m³/hr)
 - **DifferentialPressure**: DP across orifice (kPa)
 - **StaticPressure**: Line pressure (kPa)
@@ -64,6 +64,10 @@ Vendor-neutral CESMII SM Profile for AGA-3/AGA-8 compliant orifice gas meters. W
 - **EnergyFlowRate**: Energy flow (GJ/hr)
 - **AccumulatedVolume**: Total volume (m³)
 - **AccumulatedEnergy**: Total energy (GJ)
+- **CurrentDayVolume**: Volume since last contract hour rollover (m³)
+- **PreviousDayVolume**: Total volume for previous contract day (m³)
+- **CurrentHourVolume**: Volume since start of current hour (m³)
+- **PreviousHourVolume**: Total volume for previous hour (m³)
 - **HeatingValue**: Gas heating value (MJ/m³)
 - **Status**: Normal/Alarm/Fault/Offline
 
@@ -74,10 +78,10 @@ Vendor-neutral CESMII SM Profile for AGA-3/AGA-8 compliant orifice gas meters. W
 - Communications Fault
 - Sensor Out of Range
 
-## Total Properties: 69
+## Total Properties: 73
 
-**Configuration (static)**: 59 properties  
-**Runtime (dynamic)**: 10 properties
+**Configuration (static)**: 59 properties
+**Runtime (dynamic)**: 14 properties
 
 ## Usage Notes
 

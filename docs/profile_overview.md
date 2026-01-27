@@ -44,8 +44,8 @@ The MeterRun profile links a flow computer to its meter configurations and inclu
 ### Meter Configuration Profiles
 
 #### OrificeGasMeter (v0.2.0)
-**File**: `profiles/orifice_gas_meter.jsonld`  
-**Properties**: 69  
+**File**: `profiles/orifice_gas_meter.jsonld`
+**Properties**: 73
 **Purpose**: AGA-3/AGA-8 compliant orifice gas meter configuration
 
 **[Full Documentation](orifice_gas_meter_overview.md)**
@@ -68,8 +68,8 @@ Comprehensive profile for orifice gas meters including:
 - Compressibility factor calculations
 
 #### LiquidMeter (v0.1.0)
-**File**: `profiles/liquid_meter.jsonld`  
-**Properties**: 53  
+**File**: `profiles/liquid_meter.jsonld`
+**Properties**: 57
 **Purpose**: Vendor-neutral liquid meter configuration
 
 **[Full Documentation](liquid_meter_overview.md)**
@@ -99,7 +99,7 @@ Comprehensive profile for liquid meters including:
 |---------|----------------|-------------|
 | **Fluid Type** | Natural gas | Crude, condensate, water, NGLs |
 | **Meter Technologies** | Orifice plate only | Turbine, PD, Coriolis, ultrasonic, magnetic |
-| **Properties** | 69 | 53 |
+| **Properties** | 73 | 57 |
 | **Complexity** | High (compression calcs) | Medium (simpler corrections) |
 | **Standards** | AGA-3, AGA-8 | API MPMS 11.1, API 2540, ISO 91-1 |
 | **Composition** | 21-component gas analysis | API gravity, water cut, BS&W |
@@ -114,8 +114,8 @@ Comprehensive profile for liquid meters including:
 |---------|------------------|-------------------|--------|
 | FlowComputer | 20 | 8 | 8 |
 | MeterRun | 7 | 1 | 0 |
-| OrificeGasMeter | 59 | 10 | 8 |
-| LiquidMeter | 35 | 8 | 12 |
+| OrificeGasMeter | 59 | 14 | 8 |
+| LiquidMeter | 35 | 12 | 12 |
 
 ## Usage Examples
 
