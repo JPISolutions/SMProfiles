@@ -6,11 +6,13 @@ Vendor-neutral CESMII SM Profile for AGA-3/AGA-8 compliant orifice gas meters. W
 
 ## Profile Structure
 
-### Equipment Identification (5 properties)
+### Equipment Identification (7 properties)
 - **Name**: Meter identifier
 - **Owner**: Owner/operator name
 - **Latitude/Longitude**: GPS coordinates
 - **Elevation**: Elevation above sea level
+- **SurfaceLSD**: Surface Legal Subdivision location (Western Canadian land survey)
+- **DownholeLSD**: Downhole/bottom-hole Legal Subdivision location
 
 ### Base Conditions (5 properties)
 - **BaseTemperature**: Reference temp for volume correction (typically 15°C)
@@ -78,9 +80,9 @@ Vendor-neutral CESMII SM Profile for AGA-3/AGA-8 compliant orifice gas meters. W
 - Communications Fault
 - Sensor Out of Range
 
-## Total Properties: 73
+## Total Properties: 75
 
-**Configuration (static)**: 59 properties
+**Configuration (static)**: 61 properties
 **Runtime (dynamic)**: 14 properties
 
 ## Usage Notes

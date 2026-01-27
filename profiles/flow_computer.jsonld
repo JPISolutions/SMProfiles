@@ -139,6 +139,22 @@
       "sm:accessMode": "read"
     },
     {
+      "@id": "jpi:FlowComputer/SurfaceLSD",
+      "@type": "sm:Property",
+      "rdfs:label": "Surface LSD",
+      "rdfs:comment": "Surface Legal Subdivision location (Western Canadian land survey format: LSD-Sec-Twp-Rge-Mer)",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:FlowComputer/DownholeLSD",
+      "@type": "sm:Property",
+      "rdfs:label": "Downhole LSD",
+      "rdfs:comment": "Downhole/bottom-hole Legal Subdivision location (Western Canadian land survey format: LSD-Sec-Twp-Rge-Mer)",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
       "@id": "jpi:FlowComputer/TimeZone",
       "@type": "sm:Property",
       "rdfs:label": "Time Zone",

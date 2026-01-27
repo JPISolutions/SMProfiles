@@ -18,34 +18,35 @@ FlowComputer (Device)
 ### Device & Run Profiles
 
 #### FlowComputer (v0.1.0)
-**File**: `profiles/flow_computer.jsonld`  
-**Properties**: 28  
+**File**: `profiles/flow_computer.jsonld`
+**Properties**: 30
 **Purpose**: Top-level device profile for flow computers
 
 The FlowComputer profile represents the physical flow computer device (FloBoss, TotalFlow, SCADA pack, etc.) and includes:
 - Device identification (name, manufacturer, model, serial, firmware)
 - Network configuration (IP, MAC, Modbus address)
-- Location data (GPS, elevation, time zone)
+- Location data (GPS, elevation, time zone, surface/downhole LSD)
 - Health monitoring (CPU, memory, battery, temperature)
 - Configuration (number of runs, contract hour)
 - Status and alarms
 
 #### MeterRun (v0.1.0)
-**File**: `profiles/meter_run.jsonld`  
-**Properties**: 8  
+**File**: `profiles/meter_run.jsonld`
+**Properties**: 10
 **Purpose**: Represents individual meter runs on a flow computer
 
 The MeterRun profile links a flow computer to its meter configurations and includes:
 - Run identification (run number, name)
 - Configuration (meter type, enabled status, flow direction)
 - Ownership and purpose
+- Location (surface/downhole LSD)
 - Reference to type-specific meter configuration
 
 ### Meter Configuration Profiles
 
 #### OrificeGasMeter (v0.2.0)
 **File**: `profiles/orifice_gas_meter.jsonld`
-**Properties**: 73
+**Properties**: 75
 **Purpose**: AGA-3/AGA-8 compliant orifice gas meter configuration
 
 **[Full Documentation](orifice_gas_meter_overview.md)**
@@ -69,7 +70,7 @@ Comprehensive profile for orifice gas meters including:
 
 #### LiquidMeter (v0.1.0)
 **File**: `profiles/liquid_meter.jsonld`
-**Properties**: 57
+**Properties**: 59
 **Purpose**: Vendor-neutral liquid meter configuration
 
 **[Full Documentation](liquid_meter_overview.md)**
@@ -99,7 +100,7 @@ Comprehensive profile for liquid meters including:
 |---------|----------------|-------------|
 | **Fluid Type** | Natural gas | Crude, condensate, water, NGLs |
 | **Meter Technologies** | Orifice plate only | Turbine, PD, Coriolis, ultrasonic, magnetic |
-| **Properties** | 73 | 57 |
+| **Properties** | 75 | 59 |
 | **Complexity** | High (compression calcs) | Medium (simpler corrections) |
 | **Standards** | AGA-3, AGA-8 | API MPMS 11.1, API 2540, ISO 91-1 |
 | **Composition** | 21-component gas analysis | API gravity, water cut, BS&W |
@@ -112,10 +113,10 @@ Comprehensive profile for liquid meters including:
 
 | Profile | Config Properties | Runtime Properties | Alarms |
 |---------|------------------|-------------------|--------|
-| FlowComputer | 20 | 8 | 8 |
-| MeterRun | 7 | 1 | 0 |
-| OrificeGasMeter | 59 | 14 | 8 |
-| LiquidMeter | 35 | 12 | 12 |
+| FlowComputer | 22 | 8 | 8 |
+| MeterRun | 9 | 1 | 0 |
+| OrificeGasMeter | 61 | 14 | 8 |
+| LiquidMeter | 37 | 12 | 12 |
 
 ## Usage Examples
 

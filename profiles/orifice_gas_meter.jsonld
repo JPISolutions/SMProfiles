@@ -58,6 +58,22 @@
       "sm:accessMode": "read"
     },
     {
+      "@id": "jpi:OrificeGasMeter/SurfaceLSD",
+      "@type": "sm:Property",
+      "rdfs:label": "Surface LSD",
+      "rdfs:comment": "Surface Legal Subdivision location (Western Canadian land survey format: LSD-Sec-Twp-Rge-Mer)",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
+      "@id": "jpi:OrificeGasMeter/DownholeLSD",
+      "@type": "sm:Property",
+      "rdfs:label": "Downhole LSD",
+      "rdfs:comment": "Downhole/bottom-hole Legal Subdivision location (Western Canadian land survey format: LSD-Sec-Twp-Rge-Mer)",
+      "sm:dataType": "xsd:string",
+      "sm:accessMode": "read"
+    },
+    {
       "@id": "jpi:OrificeGasMeter/BaseTemperature",
       "@type": "sm:Property",
       "rdfs:label": "Base Temperature",

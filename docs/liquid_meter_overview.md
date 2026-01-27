@@ -6,13 +6,15 @@ Vendor-neutral CESMII SM Profile for liquid meters including turbine, positive d
 
 ## Profile Structure
 
-### Equipment Identification (6 properties)
+### Equipment Identification (8 properties)
 - **Name**: Meter identifier
 - **Owner**: Owner/operator name
 - **MeterType**: Turbine/Positive_Displacement/Coriolis/Ultrasonic/Magnetic
 - **FluidType**: Crude_Oil/Condensate/Water/Natural_Gas_Liquids/Refined_Products/Mixed_Liquids
 - **Latitude/Longitude**: GPS coordinates
 - **Elevation**: Elevation above sea level
+- **SurfaceLSD**: Surface Legal Subdivision location (Western Canadian land survey)
+- **DownholeLSD**: Downhole/bottom-hole Legal Subdivision location
 
 ### Base Conditions (4 properties)
 - **BaseTemperature**: Reference temp for volume correction (typically 15°C or 60°F)
@@ -75,9 +77,9 @@ Vendor-neutral CESMII SM Profile for liquid meters including turbine, positive d
 - Sensor Fault
 - Calibration Due
 
-## Total Properties: 57
+## Total Properties: 59
 
-**Configuration (static)**: 35 properties
+**Configuration (static)**: 37 properties
 **Runtime (dynamic)**: 12 properties
 **Alarms**: 12 types
 
