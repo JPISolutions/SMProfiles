@@ -1,0 +1,161 @@
+[
+    {
+        "id": "smprofile-efm-flow",
+        "type": "tab",
+        "label": "SMProfile EFM Builder",
+        "disabled": false,
+        "info": "Builds JSON-LD payloads conforming to SMProfiles for SCADAPack 474 with 1 orifice meter run"
+    },
+    {
+        "id": "inject-test-data",
+        "type": "inject",
+        "z": "smprofile-efm-flow",
+        "name": "Test Data (simulate Modbus poll)",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "meterId",
+                "v": "SCADAPAK-474-RUN1-METER",
+                "vt": "str"
+            },
+            {
+                "p": "meterName",
+                "v": "Well 042 Sales Meter",
+                "vt": "str"
+            },
+            {
+                "p": "runId",
+                "v": "SCADAPAK-474-RUN1",
+                "vt": "str"
+            },
+            {
+                "p": "runNumber",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "p": "runName",
+                "v": "Run 1 - Sales",
+                "vt": "str"
+            },
+            {
+                "p": "deviceId",
+                "v": "SCADAPAK-474",
+                "vt": "str"
+            },
+            {
+                "p": "deviceName",
+                "v": "Well 042 Flow Computer",
+                "vt": "str"
+            },
+            {
+                "p": "owner",
+                "v": "Your Company",
+                "vt": "str"
+            }
+        ],
+        "payload": "{\"flowRate\":245.6,\"differentialPressure\":12.4,\"staticPressure\":3450.2,\"temperature\":18.5,\"accumulatedVolume\":1247850.3,\"currentDayVolume\":5420.8,\"previousDayVolume\":8234.5,\"currentHourVolume\":245.6,\"previousHourVolume\":242.1,\"energyFlowRate\":9.84,\"heatingValue\":40.05,\"gasDensity\":50.0,\"compressibility\":0.9842,\"specificGravity\":0.65,\"meterStatus\":\"Normal\",\"orificeDiameter\":26.1,\"pipeInsideDiameter\":76.1,\"baseTemperature\":15.0,\"basePressure\":101.325,\"atmosphericPressure\":101.325,\"contractHour\":8,\"aga3Calculation\":\"AGA3_1992\",\"location\":\"Well 042 - Battery 12\",\"latitude\":48.2891,\"longitude\":-103.4567,\"elevation\":625.3,\"surfaceLSD\":\"12-24-048-03W4\",\"cpuLoad\":15.2,\"memoryUsed\":42.5,\"batteryVoltage\":12.8,\"powerSupplyVoltage\":24.1,\"ambientTemperature\":22.5,\"uptime\":2592000,\"ipAddress\":\"192.168.1.100\",\"modbusAddress\":1}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 200,
+        "y": 100,
+        "wires": [
+            [
+                "build-orifice-meter"
+            ]
+        ]
+    },
+    {
+        "id": "build-orifice-meter",
+        "type": "function",
+        "z": "smprofile-efm-flow",
+        "name": "Build OrificeGasMeter",
+        "func": "// Build OrificeGasMeter - uses jpi: namespace to reference profile\n\nconst CONFIG = {\n    meterId: msg.meterId || \"SCADAPAK-474-RUN1-METER\",\n    meterName: msg.meterName || \"SCADAPak 474 Orifice Meter\",\n    owner: msg.owner || \"Your Company\"\n};\n\nconst timestamp = new Date().toISOString();\n\nfunction propVal(value, unit, includeTimestamp) {\n    const obj = { value: value };\n    if (unit) obj.unit = unit;\n    if (includeTimestamp) obj.timestamp = timestamp;\n    return obj;\n}\n\nconst orificeGasMeter = {\n    \"@id\": `jpi:OrificeGasMeter/Instance/${CONFIG.meterId}`,\n    \"@type\": \"jpi:OrificeGasMeter\",\n    \"rdfs:label\": CONFIG.meterName,\n    \"jpi:propertyValues\": {\n        \"Name\": propVal(CONFIG.meterName),\n        \"Owner\": propVal(CONFIG.owner),\n        ...(msg.payload.latitude && { \"Latitude\": propVal(msg.payload.latitude, \"unit:DEG\") }),\n        ...(msg.payload.longitude && { \"Longitude\": propVal(msg.payload.longitude, \"unit:DEG\") }),\n        ...(msg.payload.elevation && { \"Elevation\": propVal(msg.payload.elevation, \"unit:M\") }),\n        ...(msg.payload.surfaceLSD && { \"SurfaceLSD\": propVal(msg.payload.surfaceLSD) }),\n        \"BaseTemperature\": propVal(msg.payload.baseTemperature || 15.0, \"unit:DEG_C\"),\n        \"BasePressure\": propVal(msg.payload.basePressure || 101.325, \"unit:KiloPA\"),\n        \"AtmosphericPressure\": propVal(msg.payload.atmosphericPressure || 101.325, \"unit:KiloPA\"),\n        \"Units\": propVal(msg.payload.units || \"metric\"),\n        \"ContractHour\": propVal(msg.payload.contractHour || 8),\n        \"AGA3_Calculation\": propVal(msg.payload.aga3Calculation || \"AGA3_1992\"),\n        \"OrificeTapType\": propVal(msg.payload.orificeTapType || \"Flange\"),\n        \"OrificeDiameter\": propVal(msg.payload.orificeDiameter, \"unit:MilliM\"),\n        \"OrificeMaterial\": propVal(msg.payload.orificeMaterial || \"Type_316_Stainless_Steel\"),\n        \"OrificeReferenceTemperature\": propVal(msg.payload.orificeRefTemp || 20.0, \"unit:DEG_C\"),\n        \"PipeInsideDiameter\": propVal(msg.payload.pipeInsideDiameter, \"unit:MilliM\"),\n        \"PipeMaterial\": propVal(msg.payload.pipeMaterial || \"Carbon_Steel\"),\n        \"PipeReferenceTemperature\": propVal(msg.payload.pipeRefTemp || 20.0, \"unit:DEG_C\"),\n        \"IsentropicExponent\": propVal(msg.payload.isentropicExponent || 1.3, \"unit:UNITLESS\"),\n        \"Viscosity\": propVal(msg.payload.viscosity || 0.010268, \"unit:CentiPOISE\"),\n        \"FlowExtension\": propVal(msg.payload.flowExtension || \"Method_1\"),\n        ...(msg.payload.gasDensity && { \"GasDensity\": propVal(msg.payload.gasDensity, \"unit:KiloGM-PER-M3\", true) }),\n        ...(msg.payload.compressibility && { \"Compressibility\": propVal(msg.payload.compressibility, \"unit:UNITLESS\", true) }),\n        ...(msg.payload.specificGravity && { \"SpecificGravity\": propVal(msg.payload.specificGravity, \"unit:UNITLESS\", true) }),\n        \"FlowRate\": propVal(msg.payload.flowRate, \"unit:M3-PER-HR\", true),\n        \"DifferentialPressure\": propVal(msg.payload.differentialPressure, \"unit:KiloPA\", true),\n        \"StaticPressure\": propVal(msg.payload.staticPressure, \"unit:KiloPA\", true),\n        \"Temperature\": propVal(msg.payload.temperature, \"unit:DEG_C\", true),\n        ...(msg.payload.energyFlowRate && { \"EnergyFlowRate\": propVal(msg.payload.energyFlowRate, \"unit:GJ-PER-HR\", true) }),\n        ...(msg.payload.heatingValue && { \"HeatingValue\": propVal(msg.payload.heatingValue, \"unit:MegaJ-PER-M3\", true) }),\n        \"AccumulatedVolume\": propVal(msg.payload.accumulatedVolume || 0, \"unit:M3\", true),\n        ...(msg.payload.accumulatedEnergy && { \"AccumulatedEnergy\": propVal(msg.payload.accumulatedEnergy, \"unit:GigaJ\", true) }),\n        ...(msg.payload.currentDayVolume && { \"CurrentDayVolume\": propVal(msg.payload.currentDayVolume, \"unit:M3\", true) }),\n        ...(msg.payload.previousDayVolume && { \"PreviousDayVolume\": propVal(msg.payload.previousDayVolume, \"unit:M3\") }),\n        ...(msg.payload.currentHourVolume && { \"CurrentHourVolume\": propVal(msg.payload.currentHourVolume, \"unit:M3\", true) }),\n        ...(msg.payload.previousHourVolume && { \"PreviousHourVolume\": propVal(msg.payload.previousHourVolume, \"unit:M3\") }),\n        \"Status\": propVal(msg.payload.meterStatus || \"Normal\", null, true)\n    }\n};\n\nmsg.orificeGasMeter = orificeGasMeter;\nmsg.timestamp = timestamp;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 100,
+        "wires": [
+            [
+                "build-meter-run"
+            ]
+        ]
+    },
+    {
+        "id": "build-meter-run",
+        "type": "function",
+        "z": "smprofile-efm-flow",
+        "name": "Build MeterRun",
+        "func": "// Build MeterRun - uses jpi: namespace to reference profile\n\nconst CONFIG = {\n    runId: msg.runId || \"SCADAPAK-474-RUN1\",\n    runNumber: msg.runNumber || 1,\n    runName: msg.runName || \"Run 1 - Sales\",\n    owner: msg.owner || \"Your Company\"\n};\n\nconst timestamp = msg.timestamp || new Date().toISOString();\n\nfunction propVal(value, unit, includeTimestamp) {\n    const obj = { value: value };\n    if (unit) obj.unit = unit;\n    if (includeTimestamp) obj.timestamp = timestamp;\n    return obj;\n}\n\nlet runStatus = \"Normal\";\nif (msg.orificeGasMeter && msg.orificeGasMeter[\"jpi:propertyValues\"]?.Status?.value) {\n    const meterStatus = msg.orificeGasMeter[\"jpi:propertyValues\"].Status.value;\n    if (meterStatus === \"Fault\" || meterStatus === \"Offline\") {\n        runStatus = \"Fault\";\n    } else if (meterStatus === \"Alarm\") {\n        runStatus = \"Alarm\";\n    }\n}\n\nconst meterRun = {\n    \"@id\": `jpi:MeterRun/Instance/${CONFIG.runId}`,\n    \"@type\": \"jpi:MeterRun\",\n    \"rdfs:label\": CONFIG.runName,\n    \"jpi:propertyValues\": {\n        \"RunNumber\": propVal(CONFIG.runNumber),\n        \"RunName\": propVal(CONFIG.runName),\n        \"MeterType\": propVal(\"Orifice\"),\n        \"Enabled\": propVal(true),\n        \"FlowDirection\": propVal(msg.payload.flowDirection || \"Forward\"),\n        \"Owner\": propVal(CONFIG.owner),\n        ...(msg.payload.surfaceLSD && { \"SurfaceLSD\": propVal(msg.payload.surfaceLSD) }),\n        \"Purpose\": propVal(msg.payload.purpose || \"Sales\"),\n        \"Status\": propVal(runStatus, null, true)\n    }\n};\n\nif (msg.orificeGasMeter) {\n    meterRun[\"jpi:hasMeterConfiguration\"] = msg.orificeGasMeter;\n}\n\nmsg.meterRun = meterRun;\nmsg.timestamp = timestamp;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 100,
+        "wires": [
+            [
+                "build-flow-computer"
+            ]
+        ]
+    },
+    {
+        "id": "build-flow-computer",
+        "type": "function",
+        "z": "smprofile-efm-flow",
+        "name": "Build FlowComputer",
+        "func": "// Build FlowComputer - jpi: namespace links to profile definitions at:\n// https://github.com/JPISolutions/SMProfiles/profiles/v1#\n\nconst CONFIG = {\n    deviceId: msg.deviceId || \"SCADAPAK-474\",\n    deviceName: msg.deviceName || \"SCADAPack 474 Flow Computer\",\n    manufacturer: \"Schneider_Electric\",\n    model: \"SCADAPack 474\"\n};\n\nconst timestamp = msg.timestamp || new Date().toISOString();\n\nfunction propVal(value, unit, includeTimestamp) {\n    const obj = { value: value };\n    if (unit) obj.unit = unit;\n    if (includeTimestamp) obj.timestamp = timestamp;\n    return obj;\n}\n\nlet deviceStatus = \"Normal\";\nlet activeAlarmCount = 0;\n\nif (msg.meterRun) {\n    const runStatus = msg.meterRun[\"jpi:propertyValues\"]?.Status?.value;\n    if (runStatus === \"Fault\") {\n        deviceStatus = \"Fault\";\n        activeAlarmCount++;\n    } else if (runStatus === \"Alarm\") {\n        deviceStatus = \"Alarm\";\n        activeAlarmCount++;\n    }\n}\n\nconst flowComputer = {\n    \"@context\": {\n        \"jpi\": \"https://github.com/JPISolutions/SMProfiles/profiles/v1#\",\n        \"sm\": \"http://cesmii.org/sm/\",\n        \"rdfs\": \"http://www.w3.org/2000/01/rdf-schema#\",\n        \"xsd\": \"http://www.w3.org/2001/XMLSchema#\",\n        \"unit\": \"http://qudt.org/vocab/unit/\"\n    },\n    \"@id\": `jpi:FlowComputer/Instance/${CONFIG.deviceId}`,\n    \"@type\": \"jpi:FlowComputer\",\n    \"rdfs:label\": CONFIG.deviceName,\n    \"jpi:propertyValues\": {\n        \"DeviceName\": propVal(CONFIG.deviceName),\n        \"Manufacturer\": propVal(CONFIG.manufacturer),\n        \"Model\": propVal(CONFIG.model),\n        ...(msg.payload.ipAddress && { \"IPAddress\": propVal(msg.payload.ipAddress) }),\n        ...(msg.payload.modbusAddress && { \"ModbusAddress\": propVal(msg.payload.modbusAddress) }),\n        ...(msg.payload.location && { \"Location\": propVal(msg.payload.location) }),\n        ...(msg.payload.latitude && { \"Latitude\": propVal(msg.payload.latitude, \"unit:DEG\") }),\n        ...(msg.payload.longitude && { \"Longitude\": propVal(msg.payload.longitude, \"unit:DEG\") }),\n        ...(msg.payload.elevation && { \"Elevation\": propVal(msg.payload.elevation, \"unit:M\") }),\n        ...(msg.payload.surfaceLSD && { \"SurfaceLSD\": propVal(msg.payload.surfaceLSD) }),\n        \"CurrentDateTime\": propVal(timestamp),\n        ...(msg.payload.uptime && { \"Uptime\": propVal(msg.payload.uptime, \"unit:SEC\") }),\n        \"NumberOfRuns\": propVal(1),\n        ...(msg.payload.contractHour && { \"ContractHour\": propVal(msg.payload.contractHour) }),\n        ...(msg.payload.atmosphericPressure && { \"AtmosphericPressure\": propVal(msg.payload.atmosphericPressure, \"unit:KiloPA\") }),\n        ...(msg.payload.cpuLoad && { \"CPULoad\": propVal(msg.payload.cpuLoad, \"unit:PERCENT\", true) }),\n        ...(msg.payload.memoryUsed && { \"MemoryUsed\": propVal(msg.payload.memoryUsed, \"unit:PERCENT\", true) }),\n        ...(msg.payload.batteryVoltage && { \"BatteryVoltage\": propVal(msg.payload.batteryVoltage, \"unit:V\", true) }),\n        ...(msg.payload.powerSupplyVoltage && { \"PowerSupplyVoltage\": propVal(msg.payload.powerSupplyVoltage, \"unit:V\", true) }),\n        ...(msg.payload.ambientTemperature && { \"AmbientTemperature\": propVal(msg.payload.ambientTemperature, \"unit:DEG_C\", true) }),\n        \"Status\": propVal(deviceStatus, null, true),\n        \"ActiveAlarmCount\": propVal(activeAlarmCount)\n    }\n};\n\nif (msg.meterRun) {\n    flowComputer[\"jpi:hasRun\"] = [msg.meterRun];\n}\n\nmsg.payload = flowComputer;\nmsg.topic = `efm/devices/${CONFIG.deviceId}/data`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 100,
+        "wires": [
+            [
+                "debug-output"
+            ]
+        ]
+    },
+    {
+        "id": "debug-output",
+        "type": "debug",
+        "z": "smprofile-efm-flow",
+        "name": "SMProfile Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1130,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "comment-usage",
+        "type": "comment",
+        "z": "smprofile-efm-flow",
+        "name": "Usage Instructions",
+        "info": "## SMProfile EFM Builder Flow\n\nThis flow builds JSON-LD payloads that conform to the SMProfiles for EFM devices.\n\n### Namespace\nThe `jpi:` prefix links to the profile definitions at:\n`https://github.com/JPISolutions/SMProfiles/profiles/v1#`\n\n### Data Flow:\n1. **Modbus Poll** → Raw register values from SCADAPack 474\n2. **Build OrificeGasMeter** → Creates jpi:OrificeGasMeter\n3. **Build MeterRun** → Creates jpi:MeterRun with nested meter\n4. **Build FlowComputer** → Creates jpi:FlowComputer with @context\n\n### Output Types:\n- `jpi:FlowComputer` → profiles/flow_computer.jsonld\n- `jpi:MeterRun` → profiles/meter_run.jsonld  \n- `jpi:OrificeGasMeter` → profiles/orifice_gas_meter.jsonld",
+        "x": 150,
+        "y": 200,
+        "wires": []
+    }
+]
