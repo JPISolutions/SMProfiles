@@ -1,0 +1,341 @@
+[
+    {
+        "id": "modbus-efm-flow",
+        "type": "tab",
+        "label": "Modbus EFM Flow",
+        "disabled": false,
+        "info": "Modbus communication flow for SCADAPack 474 EFM using node-red-contrib-modbus.\n\nEdit the 'Register Configuration' node to set your register addresses.\n\nProperties NOT in REGISTER_MAP will be excluded from both polling AND the JSON output."
+    },
+    {
+        "id": "config-comment",
+        "type": "comment",
+        "z": "modbus-efm-flow",
+        "name": "1. CONFIGURATION - Edit register addresses here",
+        "info": "The Register Configuration node below contains all register mappings.\nEdit it to match your SCADAPack 474 configuration.\n\nTo EXCLUDE a property:\n1. Remove or comment it out from REGISTER_MAP\n2. Remove it from the relevant REGISTER_GROUPS.properties array\n\nThe property will not be polled and will not appear in the JSON output.",
+        "x": 220,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "inject-config",
+        "type": "inject",
+        "z": "modbus-efm-flow",
+        "name": "Load Config on Start",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "topic": "",
+        "x": 140,
+        "y": 100,
+        "wires": [
+            [
+                "register-config"
+            ]
+        ]
+    },
+    {
+        "id": "register-config",
+        "type": "function",
+        "z": "modbus-efm-flow",
+        "name": "Register Configuration",
+        "func": "// ============================================================================\n// REGISTER CONFIGURATION\n// ============================================================================\n// To EXCLUDE a property from polling AND JSON output:\n//   1. Remove or comment out the line in REGISTER_MAP\n//   2. Remove it from the REGISTER_GROUPS.properties array\n// ============================================================================\n\nconst REGISTER_MAP = {\n    // Format: \"propertyName\": { address: <reg>, length: <count>, type: \"<type>\" }\n    // Types: \"int16\", \"uint16\", \"int32\", \"uint32\", \"float32\", \"float32sw\"\n    \n    // === LIVE MEASUREMENTS (REQUIRED - don't remove these) ===\n    flowRate:               { address: 0,    length: 2, type: \"float32\" },\n    differentialPressure:   { address: 2,    length: 2, type: \"float32\" },\n    staticPressure:         { address: 4,    length: 2, type: \"float32\" },\n    temperature:            { address: 6,    length: 2, type: \"float32\" },\n    \n    // === TOTALS (optional - comment out if not available) ===\n    accumulatedVolume:      { address: 8,    length: 2, type: \"float32\" },\n    currentDayVolume:       { address: 10,   length: 2, type: \"float32\" },\n    previousDayVolume:      { address: 12,   length: 2, type: \"float32\" },\n    currentHourVolume:      { address: 14,   length: 2, type: \"float32\" },\n    previousHourVolume:     { address: 16,   length: 2, type: \"float32\" },\n    \n    // === ENERGY (optional - comment out if not available) ===\n    // energyFlowRate:      { address: 18,   length: 2, type: \"float32\" },\n    // heatingValue:        { address: 20,   length: 2, type: \"float32\" },\n    // accumulatedEnergy:   { address: 22,   length: 2, type: \"float32\" },\n    \n    // === GAS PROPERTIES (optional - comment out if not available) ===\n    // gasDensity:          { address: 24,   length: 2, type: \"float32\" },\n    // compressibility:     { address: 26,   length: 2, type: \"float32\" },\n    // specificGravity:     { address: 28,   length: 2, type: \"float32\" },\n    \n    // === CONFIGURATION (optional) ===\n    // orificeDiameter:     { address: 100,  length: 2, type: \"float32\" },\n    // pipeInsideDiameter:  { address: 102,  length: 2, type: \"float32\" },\n    // baseTemperature:     { address: 104,  length: 2, type: \"float32\" },\n    // basePressure:        { address: 106,  length: 2, type: \"float32\" },\n    // atmosphericPressure: { address: 108,  length: 2, type: \"float32\" },\n    // contractHour:        { address: 110,  length: 1, type: \"uint16\" },\n    \n    // === DEVICE HEALTH (optional) ===\n    // batteryVoltage:      { address: 200,  length: 2, type: \"float32\" },\n    // powerSupplyVoltage:  { address: 202,  length: 2, type: \"float32\" },\n    // ambientTemperature:  { address: 204,  length: 2, type: \"float32\" },\n    // meterStatus:         { address: 206,  length: 1, type: \"uint16\" }\n};\n\n// Register groups - only include properties that exist in REGISTER_MAP above\nconst REGISTER_GROUPS = {\n    liveData: {\n        fc: 3,\n        startAddress: 0,\n        quantity: 18,\n        properties: [\n            \"flowRate\", \"differentialPressure\", \"staticPressure\", \"temperature\",\n            \"accumulatedVolume\", \"currentDayVolume\", \"previousDayVolume\",\n            \"currentHourVolume\", \"previousHourVolume\"\n            // Add back if uncommenting above:\n            // \"energyFlowRate\", \"heatingValue\", \"gasDensity\", \"compressibility\", \"specificGravity\"\n        ]\n    }\n    // Uncomment and configure if you have separate register blocks:\n    // configuration: {\n    //     fc: 3,\n    //     startAddress: 100,\n    //     quantity: 12,\n    //     properties: [\"orificeDiameter\", \"pipeInsideDiameter\", \"baseTemperature\",\n    //                  \"basePressure\", \"atmosphericPressure\", \"contractHour\"]\n    // },\n    // deviceHealth: {\n    //     fc: 3,\n    //     startAddress: 200,\n    //     quantity: 8,\n    //     properties: [\"batteryVoltage\", \"powerSupplyVoltage\", \"ambientTemperature\", \"meterStatus\"]\n    // }\n};\n\n// Device identification (static values - not from Modbus)\nconst DEVICE_CONFIG = {\n    deviceId: \"SCADAPAK-474\",\n    deviceName: \"Well 042 Flow Computer\",\n    meterId: \"SCADAPAK-474-RUN1-METER\",\n    meterName: \"Well 042 Sales Meter\",\n    runId: \"SCADAPAK-474-RUN1\",\n    runNumber: 1,\n    runName: \"Run 1 - Sales\",\n    owner: \"Your Company\",\n    \n    // Static meter config (used if not reading from Modbus)\n    aga3Calculation: \"AGA3_1992\",\n    orificeTapType: \"Flange\",\n    orificeMaterial: \"Type_316_Stainless_Steel\",\n    pipeMaterial: \"Carbon_Steel\",\n    units: \"metric\",\n    baseTemperature: 15.0,\n    basePressure: 101.325,\n    atmosphericPressure: 101.325,\n    contractHour: 8,\n    \n    // Static location\n    location: \"Well 042 - Battery 12\",\n    latitude: 48.2891,\n    longitude: -103.4567,\n    elevation: 625.3,\n    surfaceLSD: \"12-24-048-03W4\"\n};\n\n// ============================================================================\n// Store in flow context\nflow.set(\"REGISTER_MAP\", REGISTER_MAP);\nflow.set(\"REGISTER_GROUPS\", REGISTER_GROUPS);\nflow.set(\"DEVICE_CONFIG\", DEVICE_CONFIG);\nflow.set(\"accumulatedData\", {});\n\nconst configuredProps = Object.keys(REGISTER_MAP);\nnode.status({ fill: \"green\", shape: \"dot\", text: `${configuredProps.length} properties` });\nmsg.payload = { \n    status: \"Configuration loaded\", \n    configuredProperties: configuredProps,\n    excludedFromPolling: [\"energyFlowRate\", \"heatingValue\", \"gasDensity\", \"etc... (commented out)\"]\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 100,
+        "wires": [
+            [
+                "config-debug"
+            ]
+        ]
+    },
+    {
+        "id": "config-debug",
+        "type": "debug",
+        "z": "modbus-efm-flow",
+        "name": "Config Status",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 590,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "polling-comment",
+        "type": "comment",
+        "z": "modbus-efm-flow",
+        "name": "2. MODBUS POLLING - Adjust intervals as needed",
+        "info": "",
+        "x": 220,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "poll-live-data",
+        "type": "inject",
+        "z": "modbus-efm-flow",
+        "name": "Poll Live Data (1s)",
+        "props": [
+            {
+                "p": "modbusGroup",
+                "v": "liveData",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "2",
+        "topic": "",
+        "x": 140,
+        "y": 220,
+        "wires": [
+            [
+                "build-modbus-request"
+            ]
+        ]
+    },
+    {
+        "id": "build-modbus-request",
+        "type": "function",
+        "z": "modbus-efm-flow",
+        "name": "Build Modbus Request",
+        "func": "const REGISTER_GROUPS = flow.get(\"REGISTER_GROUPS\");\n\nif (!REGISTER_GROUPS) {\n    node.status({ fill: \"red\", shape: \"ring\", text: \"No config\" });\n    return null;\n}\n\nconst groupName = msg.modbusGroup;\nconst group = REGISTER_GROUPS[groupName];\n\nif (!group) {\n    node.status({ fill: \"yellow\", shape: \"ring\", text: `Group '${groupName}' not configured` });\n    return null;\n}\n\n// Build Modbus-Flex-Getter compatible message\nmsg.payload = {\n    value: msg.payload,\n    fc: group.fc,\n    unitid: 1,\n    address: group.startAddress,\n    quantity: group.quantity\n};\n\nnode.status({ fill: \"blue\", shape: \"dot\", text: `${groupName}: ${group.startAddress}+${group.quantity}` });\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 220,
+        "wires": [
+            [
+                "modbus-flex-getter"
+            ]
+        ]
+    },
+    {
+        "id": "modbus-flex-getter",
+        "type": "modbus-flex-getter",
+        "z": "modbus-efm-flow",
+        "name": "Read Registers",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "server": "modbus-scadapak-tcp",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 600,
+        "y": 220,
+        "wires": [
+            [
+                "parse-modbus-response"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "parse-modbus-response",
+        "type": "function",
+        "z": "modbus-efm-flow",
+        "name": "Parse Modbus Response",
+        "func": "const REGISTER_MAP = flow.get(\"REGISTER_MAP\");\nconst REGISTER_GROUPS = flow.get(\"REGISTER_GROUPS\");\nconst DEVICE_CONFIG = flow.get(\"DEVICE_CONFIG\");\n\nif (!REGISTER_MAP || !REGISTER_GROUPS) {\n    node.status({ fill: \"red\", shape: \"ring\", text: \"No config\" });\n    return null;\n}\n\nconst groupName = msg.modbusGroup;\nconst group = REGISTER_GROUPS[groupName];\n\nif (!group) {\n    node.error(`Unknown group: ${groupName}`);\n    return null;\n}\n\n// Get accumulated data\nlet accumulatedData = flow.get(\"accumulatedData\") || {};\n\n// Parse register values - ONLY for properties defined in REGISTER_MAP\nconst registers = msg.payload;\n\nfor (const propName of group.properties) {\n    const config = REGISTER_MAP[propName];\n    if (!config) {\n        // Property not in REGISTER_MAP - skip it\n        continue;\n    }\n    \n    const offset = config.address - group.startAddress;\n    if (offset < 0 || offset + config.length > registers.length) {\n        continue;\n    }\n    \n    try {\n        let value = parseValue(registers, offset, config.type || \"uint16\");\n        if (config.scale) value *= config.scale;\n        accumulatedData[propName] = value;\n    } catch (e) {\n        node.warn(`Error parsing ${propName}: ${e.message}`);\n    }\n}\n\n// Decode status if present\nif (accumulatedData.meterStatus !== undefined && typeof accumulatedData.meterStatus === 'number') {\n    const statusMap = { 0: \"Normal\", 1: \"Alarm\", 2: \"Fault\", 3: \"Offline\" };\n    accumulatedData.meterStatus = statusMap[accumulatedData.meterStatus] || \"Normal\";\n}\n\nflow.set(\"accumulatedData\", accumulatedData);\n\n// Check if we have minimum required data\nconst required = [\"flowRate\", \"differentialPressure\", \"staticPressure\", \"temperature\"];\nconst hasRequired = required.every(f => accumulatedData[f] !== undefined);\n\nif (!hasRequired) {\n    const missing = required.filter(f => accumulatedData[f] === undefined);\n    node.status({ fill: \"yellow\", shape: \"ring\", text: `Missing: ${missing.join(\", \")}` });\n    return null;\n}\n\n// Build output - only includes properties that were actually read\nmsg.payload = { ...accumulatedData };\n\n// Add device config to msg for SMProfile builders\nObject.assign(msg, DEVICE_CONFIG);\n\nnode.status({ fill: \"green\", shape: \"dot\", text: `${Object.keys(accumulatedData).length} values` });\nreturn msg;\n\n// === Helper Functions ===\nfunction parseValue(regs, offset, type) {\n    switch (type) {\n        case \"int16\":\n            return regs[offset] > 32767 ? regs[offset] - 65536 : regs[offset];\n        case \"uint16\":\n            return regs[offset];\n        case \"int32\":\n            const i32 = (regs[offset] << 16) | regs[offset + 1];\n            return i32 > 2147483647 ? i32 - 4294967296 : i32;\n        case \"uint32\":\n            return ((regs[offset] << 16) | regs[offset + 1]) >>> 0;\n        case \"float32\": {\n            const buf = new ArrayBuffer(4);\n            const view = new DataView(buf);\n            view.setUint16(0, regs[offset], false);\n            view.setUint16(2, regs[offset + 1], false);\n            return view.getFloat32(0, false);\n        }\n        case \"float32sw\": {\n            const buf = new ArrayBuffer(4);\n            const view = new DataView(buf);\n            view.setUint16(0, regs[offset + 1], false);\n            view.setUint16(2, regs[offset], false);\n            return view.getFloat32(0, false);\n        }\n        default:\n            return regs[offset];\n    }\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 220,
+        "wires": [
+            [
+                "build-orifice-meter"
+            ]
+        ]
+    },
+    {
+        "id": "smprofile-comment",
+        "type": "comment",
+        "z": "modbus-efm-flow",
+        "name": "3. SMPROFILE BUILDERS - Only includes properties from REGISTER_MAP",
+        "info": "",
+        "x": 260,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "build-orifice-meter",
+        "type": "function",
+        "z": "modbus-efm-flow",
+        "name": "Build OrificeGasMeter",
+        "func": "const CONFIG = {\n    meterId: msg.meterId || \"SCADAPAK-474-RUN1-METER\",\n    meterName: msg.meterName || \"SCADAPak 474 Orifice Meter\",\n    owner: msg.owner || \"Your Company\"\n};\n\nconst timestamp = new Date().toISOString();\nconst p = msg.payload; // Shorthand for payload\n\n// Helper to create property value object\nfunction propVal(value, unit, includeTimestamp) {\n    if (value === undefined || value === null) return undefined;\n    const obj = { value: value };\n    if (unit) obj.unit = unit;\n    if (includeTimestamp) obj.timestamp = timestamp;\n    return obj;\n}\n\n// Helper to conditionally include a property (only if value is not undefined)\nfunction has(value) {\n    return value !== undefined && value !== null;\n}\n\n// Build propertyValues - only includes properties that exist in payload\nconst propertyValues = {\n    \"Name\": propVal(CONFIG.meterName),\n    \"Owner\": propVal(CONFIG.owner)\n};\n\n// Location (from static config)\nif (has(msg.latitude)) propertyValues[\"Latitude\"] = propVal(msg.latitude, \"unit:DEG\");\nif (has(msg.longitude)) propertyValues[\"Longitude\"] = propVal(msg.longitude, \"unit:DEG\");\nif (has(msg.elevation)) propertyValues[\"Elevation\"] = propVal(msg.elevation, \"unit:M\");\nif (has(msg.surfaceLSD)) propertyValues[\"SurfaceLSD\"] = propVal(msg.surfaceLSD);\n\n// Base conditions (from config or payload)\npropertyValues[\"BaseTemperature\"] = propVal(p.baseTemperature ?? msg.baseTemperature ?? 15.0, \"unit:DEG_C\");\npropertyValues[\"BasePressure\"] = propVal(p.basePressure ?? msg.basePressure ?? 101.325, \"unit:KiloPA\");\npropertyValues[\"AtmosphericPressure\"] = propVal(p.atmosphericPressure ?? msg.atmosphericPressure ?? 101.325, \"unit:KiloPA\");\npropertyValues[\"Units\"] = propVal(msg.units || \"metric\");\npropertyValues[\"ContractHour\"] = propVal(p.contractHour ?? msg.contractHour ?? 8);\npropertyValues[\"AGA3_Calculation\"] = propVal(msg.aga3Calculation || \"AGA3_1992\");\n\n// Orifice config (from config or payload)\npropertyValues[\"OrificeTapType\"] = propVal(msg.orificeTapType || \"Flange\");\nif (has(p.orificeDiameter)) propertyValues[\"OrificeDiameter\"] = propVal(p.orificeDiameter, \"unit:MilliM\");\npropertyValues[\"OrificeMaterial\"] = propVal(msg.orificeMaterial || \"Type_316_Stainless_Steel\");\npropertyValues[\"OrificeReferenceTemperature\"] = propVal(20.0, \"unit:DEG_C\");\n\n// Pipe config\nif (has(p.pipeInsideDiameter)) propertyValues[\"PipeInsideDiameter\"] = propVal(p.pipeInsideDiameter, \"unit:MilliM\");\npropertyValues[\"PipeMaterial\"] = propVal(msg.pipeMaterial || \"Carbon_Steel\");\npropertyValues[\"PipeReferenceTemperature\"] = propVal(20.0, \"unit:DEG_C\");\n\n// Gas properties (static)\npropertyValues[\"IsentropicExponent\"] = propVal(1.3, \"unit:UNITLESS\");\npropertyValues[\"Viscosity\"] = propVal(0.010268, \"unit:CentiPOISE\");\npropertyValues[\"FlowExtension\"] = propVal(\"Method_1\");\n\n// Calculated gas properties (only if in payload from Modbus)\nif (has(p.gasDensity)) propertyValues[\"GasDensity\"] = propVal(p.gasDensity, \"unit:KiloGM-PER-M3\", true);\nif (has(p.compressibility)) propertyValues[\"Compressibility\"] = propVal(p.compressibility, \"unit:UNITLESS\", true);\nif (has(p.specificGravity)) propertyValues[\"SpecificGravity\"] = propVal(p.specificGravity, \"unit:UNITLESS\", true);\n\n// LIVE MEASUREMENTS (required - always from payload)\nif (has(p.flowRate)) propertyValues[\"FlowRate\"] = propVal(p.flowRate, \"unit:M3-PER-HR\", true);\nif (has(p.differentialPressure)) propertyValues[\"DifferentialPressure\"] = propVal(p.differentialPressure, \"unit:KiloPA\", true);\nif (has(p.staticPressure)) propertyValues[\"StaticPressure\"] = propVal(p.staticPressure, \"unit:KiloPA\", true);\nif (has(p.temperature)) propertyValues[\"Temperature\"] = propVal(p.temperature, \"unit:DEG_C\", true);\n\n// Energy (only if in payload)\nif (has(p.energyFlowRate)) propertyValues[\"EnergyFlowRate\"] = propVal(p.energyFlowRate, \"unit:GJ-PER-HR\", true);\nif (has(p.heatingValue)) propertyValues[\"HeatingValue\"] = propVal(p.heatingValue, \"unit:MegaJ-PER-M3\", true);\n\n// Totals (only if in payload)\nif (has(p.accumulatedVolume)) propertyValues[\"AccumulatedVolume\"] = propVal(p.accumulatedVolume, \"unit:M3\", true);\nif (has(p.accumulatedEnergy)) propertyValues[\"AccumulatedEnergy\"] = propVal(p.accumulatedEnergy, \"unit:GigaJ\", true);\nif (has(p.currentDayVolume)) propertyValues[\"CurrentDayVolume\"] = propVal(p.currentDayVolume, \"unit:M3\", true);\nif (has(p.previousDayVolume)) propertyValues[\"PreviousDayVolume\"] = propVal(p.previousDayVolume, \"unit:M3\");\nif (has(p.currentHourVolume)) propertyValues[\"CurrentHourVolume\"] = propVal(p.currentHourVolume, \"unit:M3\", true);\nif (has(p.previousHourVolume)) propertyValues[\"PreviousHourVolume\"] = propVal(p.previousHourVolume, \"unit:M3\");\n\n// Status\npropertyValues[\"Status\"] = propVal(p.meterStatus || \"Normal\", null, true);\n\nconst orificeGasMeter = {\n    \"@id\": `jpi:OrificeGasMeter/Instance/${CONFIG.meterId}`,\n    \"@type\": \"jpi:OrificeGasMeter\",\n    \"rdfs:label\": CONFIG.meterName,\n    \"jpi:propertyValues\": propertyValues\n};\n\nmsg.orificeGasMeter = orificeGasMeter;\nmsg.timestamp = timestamp;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 360,
+        "wires": [
+            [
+                "build-meter-run"
+            ]
+        ]
+    },
+    {
+        "id": "build-meter-run",
+        "type": "function",
+        "z": "modbus-efm-flow",
+        "name": "Build MeterRun",
+        "func": "const CONFIG = {\n    runId: msg.runId || \"SCADAPAK-474-RUN1\",\n    runNumber: msg.runNumber || 1,\n    runName: msg.runName || \"Run 1 - Sales\",\n    owner: msg.owner || \"Your Company\"\n};\n\nconst timestamp = msg.timestamp || new Date().toISOString();\n\nfunction propVal(value, unit, includeTimestamp) {\n    const obj = { value: value };\n    if (unit) obj.unit = unit;\n    if (includeTimestamp) obj.timestamp = timestamp;\n    return obj;\n}\n\nlet runStatus = \"Normal\";\nif (msg.orificeGasMeter && msg.orificeGasMeter[\"jpi:propertyValues\"]?.Status?.value) {\n    const meterStatus = msg.orificeGasMeter[\"jpi:propertyValues\"].Status.value;\n    if (meterStatus === \"Fault\" || meterStatus === \"Offline\") {\n        runStatus = \"Fault\";\n    } else if (meterStatus === \"Alarm\") {\n        runStatus = \"Alarm\";\n    }\n}\n\nconst propertyValues = {\n    \"RunNumber\": propVal(CONFIG.runNumber),\n    \"RunName\": propVal(CONFIG.runName),\n    \"MeterType\": propVal(\"Orifice\"),\n    \"Enabled\": propVal(true),\n    \"FlowDirection\": propVal(\"Forward\"),\n    \"Owner\": propVal(CONFIG.owner),\n    \"Purpose\": propVal(\"Sales\"),\n    \"Status\": propVal(runStatus, null, true)\n};\n\nif (msg.surfaceLSD) propertyValues[\"SurfaceLSD\"] = propVal(msg.surfaceLSD);\n\nconst meterRun = {\n    \"@id\": `jpi:MeterRun/Instance/${CONFIG.runId}`,\n    \"@type\": \"jpi:MeterRun\",\n    \"rdfs:label\": CONFIG.runName,\n    \"jpi:propertyValues\": propertyValues\n};\n\nif (msg.orificeGasMeter) {\n    meterRun[\"jpi:hasMeterConfiguration\"] = msg.orificeGasMeter;\n}\n\nmsg.meterRun = meterRun;\nmsg.timestamp = timestamp;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 360,
+        "wires": [
+            [
+                "build-flow-computer"
+            ]
+        ]
+    },
+    {
+        "id": "build-flow-computer",
+        "type": "function",
+        "z": "modbus-efm-flow",
+        "name": "Build FlowComputer",
+        "func": "const CONFIG = {\n    deviceId: msg.deviceId || \"SCADAPAK-474\",\n    deviceName: msg.deviceName || \"SCADAPack 474 Flow Computer\",\n    manufacturer: \"Schneider_Electric\",\n    model: \"SCADAPack 474\"\n};\n\nconst timestamp = msg.timestamp || new Date().toISOString();\nconst p = msg.payload;\n\nfunction propVal(value, unit, includeTimestamp) {\n    const obj = { value: value };\n    if (unit) obj.unit = unit;\n    if (includeTimestamp) obj.timestamp = timestamp;\n    return obj;\n}\n\nfunction has(value) {\n    return value !== undefined && value !== null;\n}\n\nlet deviceStatus = \"Normal\";\nlet activeAlarmCount = 0;\n\nif (msg.meterRun) {\n    const runStatus = msg.meterRun[\"jpi:propertyValues\"]?.Status?.value;\n    if (runStatus === \"Fault\") {\n        deviceStatus = \"Fault\";\n        activeAlarmCount++;\n    } else if (runStatus === \"Alarm\") {\n        deviceStatus = \"Alarm\";\n        activeAlarmCount++;\n    }\n}\n\nconst propertyValues = {\n    \"DeviceName\": propVal(CONFIG.deviceName),\n    \"Manufacturer\": propVal(CONFIG.manufacturer),\n    \"Model\": propVal(CONFIG.model),\n    \"CurrentDateTime\": propVal(timestamp),\n    \"NumberOfRuns\": propVal(1),\n    \"Status\": propVal(deviceStatus, null, true),\n    \"ActiveAlarmCount\": propVal(activeAlarmCount)\n};\n\n// Location (from static config)\nif (has(msg.location)) propertyValues[\"Location\"] = propVal(msg.location);\nif (has(msg.latitude)) propertyValues[\"Latitude\"] = propVal(msg.latitude, \"unit:DEG\");\nif (has(msg.longitude)) propertyValues[\"Longitude\"] = propVal(msg.longitude, \"unit:DEG\");\nif (has(msg.elevation)) propertyValues[\"Elevation\"] = propVal(msg.elevation, \"unit:M\");\nif (has(msg.surfaceLSD)) propertyValues[\"SurfaceLSD\"] = propVal(msg.surfaceLSD);\n\n// Config (from payload or static)\nif (has(p.contractHour) || has(msg.contractHour)) {\n    propertyValues[\"ContractHour\"] = propVal(p.contractHour ?? msg.contractHour);\n}\nif (has(p.atmosphericPressure) || has(msg.atmosphericPressure)) {\n    propertyValues[\"AtmosphericPressure\"] = propVal(p.atmosphericPressure ?? msg.atmosphericPressure, \"unit:KiloPA\");\n}\n\n// Device health (only if in payload from Modbus)\nif (has(p.batteryVoltage)) propertyValues[\"BatteryVoltage\"] = propVal(p.batteryVoltage, \"unit:V\", true);\nif (has(p.powerSupplyVoltage)) propertyValues[\"PowerSupplyVoltage\"] = propVal(p.powerSupplyVoltage, \"unit:V\", true);\nif (has(p.ambientTemperature)) propertyValues[\"AmbientTemperature\"] = propVal(p.ambientTemperature, \"unit:DEG_C\", true);\nif (has(p.cpuLoad)) propertyValues[\"CPULoad\"] = propVal(p.cpuLoad, \"unit:PERCENT\", true);\nif (has(p.memoryUsed)) propertyValues[\"MemoryUsed\"] = propVal(p.memoryUsed, \"unit:PERCENT\", true);\nif (has(p.uptime)) propertyValues[\"Uptime\"] = propVal(p.uptime, \"unit:SEC\");\n\nconst flowComputer = {\n    \"@context\": {\n        \"jpi\": \"https://github.com/JPISolutions/SMProfiles/profiles/v1#\",\n        \"sm\": \"http://cesmii.org/sm/\",\n        \"rdfs\": \"http://www.w3.org/2000/01/rdf-schema#\",\n        \"xsd\": \"http://www.w3.org/2001/XMLSchema#\",\n        \"unit\": \"http://qudt.org/vocab/unit/\"\n    },\n    \"@id\": `jpi:FlowComputer/Instance/${CONFIG.deviceId}`,\n    \"@type\": \"jpi:FlowComputer\",\n    \"rdfs:label\": CONFIG.deviceName,\n    \"jpi:propertyValues\": propertyValues\n};\n\nif (msg.meterRun) {\n    flowComputer[\"jpi:hasRun\"] = [msg.meterRun];\n}\n\nmsg.payload = flowComputer;\nmsg.topic = `efm/devices/${CONFIG.deviceId}/data`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 360,
+        "wires": [
+            [
+                "output-debug",
+                "rate-limit"
+            ]
+        ]
+    },
+    {
+        "id": "output-debug",
+        "type": "debug",
+        "z": "modbus-efm-flow",
+        "name": "SMProfile Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 830,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "rate-limit",
+        "type": "delay",
+        "z": "modbus-efm-flow",
+        "name": "Rate Limit (1/sec)",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": "",
+        "outputs": 1,
+        "x": 830,
+        "y": 400,
+        "wires": [
+            [
+                "mqtt-out-placeholder"
+            ]
+        ]
+    },
+    {
+        "id": "mqtt-out-placeholder",
+        "type": "debug",
+        "z": "modbus-efm-flow",
+        "name": "→ MQTT Out (replace with mqtt node)",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "topic",
+        "statusType": "msg",
+        "x": 1100,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "modbus-scadapak-tcp",
+        "type": "modbus-client",
+        "name": "SCADAPack 474",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "192.168.1.100",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB0",
+        "serialType": "RTU-BUFFERED",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": "1",
+        "commandDelay": "1",
+        "clientTimeout": "1000",
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": "2000",
+        "parallelUnitIdsAllowed": true,
+        "showErrors": false,
+        "showWarnings": true,
+        "showLogs": true
+    },
+    {
+        "id": "help-comment",
+        "type": "comment",
+        "z": "modbus-efm-flow",
+        "name": "HELP: Excluding properties from polling AND JSON",
+        "info": "## How to Exclude Properties\n\nTo exclude a property (like energyFlowRate) from both Modbus polling AND the JSON output:\n\n### Step 1: Comment out in REGISTER_MAP\n```javascript\nconst REGISTER_MAP = {\n    flowRate: { address: 0, length: 2, type: \"float32\" },\n    // energyFlowRate: { address: 18, length: 2, type: \"float32\" },  // COMMENTED OUT\n};\n```\n\n### Step 2: Remove from REGISTER_GROUPS.properties\n```javascript\nconst REGISTER_GROUPS = {\n    liveData: {\n        properties: [\n            \"flowRate\",\n            // \"energyFlowRate\",  // REMOVED\n        ]\n    }\n};\n```\n\n### Result:\n- Property will NOT be polled from Modbus\n- Property will NOT appear in the JSON-LD output\n- Zero values (0) WILL still be included (they're valid readings)\n\n### Static Config Values\nFor properties that don't come from Modbus but you still want in the JSON (like location), set them in DEVICE_CONFIG:\n```javascript\nconst DEVICE_CONFIG = {\n    latitude: 48.2891,\n    longitude: -103.4567,\n    // These will appear in JSON even without Modbus registers\n};\n```",
+        "x": 230,
+        "y": 460,
+        "wires": []
+    }
+]
