@@ -87,6 +87,9 @@ SMProfiles/
 │   ├── meter_run.jsonld
 │   ├── orifice_gas_meter.jsonld
 │   └── liquid_meter.jsonld
+├── node-red/          # Node-RED integration
+│   ├── modbus-efm-flow.json    # Production Modbus polling flow
+│   └── README.md               # Node-RED setup guide
 ├── tools/             # Python utilities
 │   ├── setup.bat
 │   ├── validate_profile.py
@@ -212,10 +215,10 @@ Supports both gas and liquid metering on the same device.
 ## Usage
 
 ### For SCADA Integration
-1. Map your FloBoss/TotalFlow tags to the FlowComputer hierarchy
-2. Build Ignition UDTs matching this structure
-3. Parse incoming data to conform to these profiles
-4. Expose standardized data to HMI, historians, and analytics
+1. Use the Node-RED flow to poll Modbus devices and generate SMProfile JSON-LD
+2. Or map your FloBoss/TotalFlow tags to the FlowComputer hierarchy manually
+3. Build Ignition UDTs matching this structure
+4. Expose standardized data to HMI, historians, and analytics via MQTT/REST
 
 ### For System Interoperability
 Use these profiles as canonical data models:
@@ -227,6 +230,35 @@ Use these profiles as canonical data models:
 1. Use `generate_profile.py` to create skeleton
 2. Add meter-specific properties (following orifice meter as template)
 3. Reference from MeterRun via `hasMeterConfiguration`
+
+## Node-RED Integration
+
+A complete Node-RED flow is provided for polling EFM devices via Modbus and generating SMProfile-compliant JSON-LD payloads.
+
+**Location**: `node-red/modbus-efm-flow.json`
+
+### Features
+
+- Polls SCADAPack 474 (or similar) via Modbus TCP using `node-red-contrib-modbus`
+- Centralized register configuration - edit one node to set all register addresses
+- Flexible data types: `float32`, `float32sw`, `int16`, `uint16`, `int32`, `uint32`
+- Automatic exclusion - properties not in the register map are excluded from both polling and JSON output
+- Builds complete three-level hierarchy: `FlowComputer` → `MeterRun` → `OrificeGasMeter`
+- Rate-limited output ready for MQTT or REST
+
+### Quick Start
+
+```bash
+# Install Modbus nodes in Node-RED
+npm install node-red-contrib-modbus
+```
+
+1. Import `node-red/modbus-efm-flow.json` into Node-RED
+2. Configure the Modbus client node with your device IP
+3. Edit the **Register Configuration** node to set your register addresses
+4. Deploy and connect to MQTT or your preferred output
+
+See [`node-red/README.md`](node-red/README.md) for detailed configuration instructions.
 
 ## Tools
 
@@ -252,11 +284,11 @@ python convert_json.py examples/input/sample_meter_config.json output.jsonld MET
 
 ## Next Steps
 
-1. **Validate** existing profiles
-2. **Map** your vendor-specific data to FlowComputer structure
+1. **Import** the Node-RED flow and configure your Modbus registers
+2. **Validate** existing profiles with the Python tools
 3. **Build** Ignition UDTs matching the hierarchy
-4. **Extend** with additional meter types (turbine, ultrasonic, coriolis)
-5. **Test** with real FloBoss/TotalFlow data
+4. **Extend** with additional meter types as needed
+5. **Deploy** to production with MQTT output
 
 ## Real-World Application
 
@@ -268,9 +300,9 @@ TotalFlow tags → Different UDT → Different HMI
 
 **After** (standardized):
 ```
-FloBoss tags ──┐
-TotalFlow tags ├─→ FlowComputer profile → Standard UDT → Unified HMI/Analytics
-Custom tags ───┘
+SCADAPack 474 ─┐
+FloBoss ROC ───┼─→ Node-RED ─→ SMProfile JSON-LD ─→ MQTT ─→ Unified HMI/Analytics
+TotalFlow G5 ──┘   (Modbus)    (jpi:FlowComputer)
 ```
 
 Built for Alberta oil & gas field operations with Directive 017 compliance in mind.
