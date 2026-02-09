@@ -2,7 +2,21 @@
 
 Thank you for your interest in contributing to the Flow Metering SM Profiles! This guide will help you get started.
 
+## Branching Model
+
+The `main` branch is **protected** — direct pushes are not allowed. All changes must go through a pull request.
+
+### Branch Naming
+
+| Branch type | Prefix | Example |
+|---|---|---|
+| New feature / meter type | `feature/` | `feature/turbine-meter` |
+| Bug fix | `fix/` | `fix/namespace-typo` |
+| Documentation | `docs/` | `docs/coriolis-overview` |
+
 ## Getting Started
+
+### External Contributors
 
 1. **Fork the repository** on GitHub
 2. **Clone your fork** locally
@@ -10,6 +24,25 @@ Thank you for your interest in contributing to the Flow Metering SM Profiles! Th
 
 ```bash
 git checkout -b feature/your-feature-name
+```
+
+4. Make your changes, then push to your fork and open a pull request against `main`
+
+### Team Members (with write access)
+
+1. **Clone the repository** directly
+2. **Create a feature branch** from `main`
+
+```bash
+git checkout main
+git pull origin main
+git checkout -b feature/your-feature-name
+```
+
+3. Push your branch and open a pull request against `main`
+
+```bash
+git push -u origin feature/your-feature-name
 ```
 
 ## Adding a New Meter Type Profile
@@ -70,18 +103,22 @@ Add an example in `examples/` showing realistic data.
 ## Pull Request Process
 
 1. **Update version numbers** if applicable
-2. **Run validation** on all modified profiles
+2. **Run validation** on all modified profiles:
+   ```bash
+   cd tools
+   python validate_profile.py ../profiles/your_profile.jsonld
+   ```
 3. **Update CHANGELOG.md** (if exists)
 4. **Write clear commit messages**:
    ```
    Add TurbineMeter profile
-   
+
    - 45 properties covering turbine meter config
    - K-factor, frequency, and viscosity correction
    - Compatible with Instromet and Daniel turbine meters
    ```
-
-5. **Submit PR** with description of changes
+5. **Push your branch** and open a PR against `main`
+6. A maintainer will review and merge your PR — do not merge directly into `main`
 
 ## Profile Versioning
 
